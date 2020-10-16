@@ -66,9 +66,6 @@ E:\DimensionDataProject\DimensionData\DimensionData\bin\Debug\netcoreapp3.1\runt
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.csprojAssemblyReference.cache
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.AssemblyInfoInputs.cache
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.AssemblyInfo.cs
-E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.csproj.CoreCompileInputs.cache
-E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.MvcApplicationPartsAssemblyInfo.cs
-E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.MvcApplicationPartsAssemblyInfo.cache
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.RazorAssemblyInfo.cache
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.RazorAssemblyInfo.cs
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.TagHelpers.input.cache
@@ -92,3 +89,12 @@ E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\stat
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.dll
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.pdb
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.genruntimeconfig.cache
+E:\DimensionDataProject\DimensionData\DimensionData\bin\Debug\netcoreapp3.1\DnsClient.dll
+E:\DimensionDataProject\DimensionData\DimensionData\bin\Debug\netcoreapp3.1\MongoDB.Bson.dll
+E:\DimensionDataProject\DimensionData\DimensionData\bin\Debug\netcoreapp3.1\MongoDB.Driver.dll
+E:\DimensionDataProject\DimensionData\DimensionData\bin\Debug\netcoreapp3.1\MongoDB.Driver.Core.dll
+E:\DimensionDataProject\DimensionData\DimensionData\bin\Debug\netcoreapp3.1\MongoDB.Libmongocrypt.dll
+E:\DimensionDataProject\DimensionData\DimensionData\bin\Debug\netcoreapp3.1\SharpCompress.dll
+E:\DimensionDataProject\DimensionData\DimensionData\bin\Debug\netcoreapp3.1\runtimes\win\native\libzstd.dll
+E:\DimensionDataProject\DimensionData\DimensionData\bin\Debug\netcoreapp3.1\runtimes\win\native\snappy32.dll
+E:\DimensionDataProject\DimensionData\DimensionData\bin\Debug\netcoreapp3.1\runtimes\win\native\snappy64.dll
