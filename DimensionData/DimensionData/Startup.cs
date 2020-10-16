@@ -12,6 +12,9 @@ using DimensionData.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using DimensionData.Services;
+using DimensionData.Models;
+using Microsoft.Extensions.Options;
 
 namespace DimensionData
 {
@@ -34,6 +37,11 @@ namespace DimensionData
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            //For Database
+            services.Configure<DatabaseSettings>(Configuration.GetSection(nameof(DatabaseSettings)));
+            services.AddSingleton<IDatabaseSettings>(x => x.GetRequiredService<IOptions<DatabaseSettings>>().Value);
+            //For Employee Service
+            services.AddSingleton<EmployeeServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

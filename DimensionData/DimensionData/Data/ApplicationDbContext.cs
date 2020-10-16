@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using DimensionData.Models;
 
 namespace DimensionData.Data
 {
@@ -12,5 +13,6 @@ namespace DimensionData.Data
             : base(options)
         {
         }
+        public DbSet<DimensionData.Models.EmployeeModel> EmployeeModel { get; set; }
     }
 }

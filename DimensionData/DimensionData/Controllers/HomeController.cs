@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using DimensionData.Models;
+using DimensionData.Services;
 
 namespace DimensionData.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly EmployeeServices _services;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, EmployeeServices services)
         {
             _logger = logger;
+            _services = services;
         }
 
         public IActionResult Index()
@@ -26,6 +29,12 @@ namespace DimensionData.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public async Task<IActionResult> EmployeeData()
+        {
+            var data = await _services.GetAllAsync();
+            return View(data);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
