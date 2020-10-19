@@ -116,5 +116,10 @@ E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Dime
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.dll
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.pdb
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.genruntimeconfig.cache
-E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\Home\EmployeeData.cshtml.g.cs
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
+E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\Employee\EmployeeData.cshtml.g.cs
+E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\Employee\Edit.cshtml.g.cs
+E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\Employee\Delete.cshtml.g.cs
+E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\Employee\View.cshtml.g.cs
+E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\Employee\Details.cshtml.g.cs
+E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\Employee\Create.cshtml.g.cs

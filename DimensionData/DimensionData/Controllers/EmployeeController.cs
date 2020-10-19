@@ -1,24 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using DimensionData.Models;
+using DimensionData.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace DimensionData.Controllers
 {
     public class EmployeeController : Controller
     {
         // GET: EmployeeController
-        public ActionResult Index()
+        private readonly ILogger<EmployeeController> _logger;
+        private readonly EmployeeServices _services;
+        private readonly IMongoCollection<EmployeeModel> employees;
+
+
+        public EmployeeController(ILogger<EmployeeController> logger, EmployeeServices services)
         {
-            return View();
+            _logger = logger;
+            _services = services;
+        }
+
+        // GET: Employee Data
+        public async Task<IActionResult> EmployeeData()
+        {
+            var data = await _services.GetAllAsync();
+            return View(data);
         }
 
         // GET: EmployeeController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Details(string id)
         {
-            return View();
+            return View(await _services.GetbyIdAsync(id));
         }
 
         // GET: EmployeeController/Create
@@ -30,16 +49,18 @@ namespace DimensionData.Controllers
         // POST: EmployeeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(string id, EmployeeModel employee)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            await _services.CreateAsync(id, employee);
+            return View();
+            //try
+            //{
+            //    return RedirectToAction(nameof(Index));
+            //}
+            //catch
+            //{
+            //    return View();
+            //}
         }
 
         // GET: EmployeeController/Edit/5
@@ -51,11 +72,18 @@ namespace DimensionData.Controllers
         // POST: EmployeeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(string id, EmployeeModel employee)
         {
+            //if (ModelState.IsValid)
+            //{
+            //    await _services.UpdateAsync(id, employee);
+            //    return RedirectToAction("EmployeeData");
+            //}
+            //return View();
             try
             {
-                return RedirectToAction(nameof(Index));
+                await _services.UpdateAsync(id, employee);
+                return RedirectToAction("EmployeeData");
             }
             catch
             {
@@ -72,16 +100,28 @@ namespace DimensionData.Controllers
         // POST: EmployeeController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> Delete(string id)
         {
-            try
+            if(ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                //await _services.DeleteAsync(id);
+                //ViewBag.Message = "Record Deleted Successfully.";
+                await _services.GetbyIdAsync(id);
+                return RedirectToAction("EmployeeData");
             }
-            catch
+            else
             {
                 return View();
             }
+
+            //try
+            //{
+            //    return RedirectToAction(nameof(Index));
+            //}
+            //catch
+            //{
+            //    return View();
+            //}
         }
     }
 }
