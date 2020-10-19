@@ -2,12 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DimensionData.Models;
+using DimensionData.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace DimensionData
 {
@@ -24,6 +27,12 @@ namespace DimensionData
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            //For Database
+            services.Configure<DatabaseSettings>(Configuration.GetSection(nameof(DatabaseSettings)));
+            services.AddSingleton<IDatabaseSettings>(x => x.GetRequiredService<IOptions<DatabaseSettings>>().Value);
+            //For Employee Service
+            services.AddSingleton<EmployeeServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
