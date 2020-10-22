@@ -11,8 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using Volo.Abp.Data;
-using static DimensionData.Data.DimensionDatabaseContext;
 
 namespace DimensionData
 {
@@ -30,10 +28,10 @@ namespace DimensionData
         {
             services.AddControllersWithViews();
 
-            //Add for database connection
+            //Add for database connection and services
             services.AddDbContext<DimensionDatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            //For Employee Service
-            //services.AddSingleton<EmployeeServices>();
+            //For Pagination
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

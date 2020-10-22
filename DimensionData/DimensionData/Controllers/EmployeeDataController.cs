@@ -21,9 +21,45 @@ namespace DimensionData.Controllers
         }
 
         // GET: EmployeeData
-        public async Task<IActionResult> Employees()
+        public async Task<IActionResult> Employees(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
-            return View(await _context.dataSet.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["EmpNrSortParam"] = sortOrder == "EmpNr" ? "empnr_desc" : "EmpNr";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewData["CurrentFilter"] = searchString;
+            var employees = from s in _context.dataSet select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                employees = employees.Where(s => s.Department.Contains(searchString)
+                                       || s.JobRole.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "EmpNr":
+                    employees = employees.OrderBy(s => s.EmployeeNumber);
+                    break;
+                case "empnr_desc":
+                    employees = employees.OrderByDescending(s => s.EmployeeNumber);
+                    break;
+                default:
+                    employees = employees.OrderBy(s => s.EmployeeNumber);
+                    break;
+            }
+
+            int pageSize = 10;
+            return View(await PaginatedList<EmployeeModel>.CreateAsync(employees.AsNoTracking(), pageNumber ?? 1, pageSize));
+            //return View(await students.AsNoTracking().ToListAsync());
         }
 
         // GET: EmployeeData/Details/5
