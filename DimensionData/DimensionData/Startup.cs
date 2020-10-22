@@ -2,15 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DimensionData.Models;
-using DimensionData.Services;
+using DimensionData.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
+using Volo.Abp.Data;
+using static DimensionData.Data.DimensionDatabaseContext;
 
 namespace DimensionData
 {
@@ -28,11 +30,10 @@ namespace DimensionData
         {
             services.AddControllersWithViews();
 
-            //For Database
-            services.Configure<DatabaseSettings>(Configuration.GetSection(nameof(DatabaseSettings)));
-            services.AddSingleton<IDatabaseSettings>(x => x.GetRequiredService<IOptions<DatabaseSettings>>().Value);
+            //Add for database connection
+            services.AddDbContext<DimensionDatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             //For Employee Service
-            services.AddSingleton<EmployeeServices>();
+            //services.AddSingleton<EmployeeServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

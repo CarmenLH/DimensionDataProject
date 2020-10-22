@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using DimensionData.Models;
-using DimensionData.Services;
 
 namespace DimensionData.Controllers
 {
