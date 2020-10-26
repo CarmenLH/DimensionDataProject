@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\DimensionDataProject\\DimensionData\\DimensionData\\DimensionData.csproj": {}
+    "C:\\Users\\Carmen\\Desktop\\DimensionData\\DimensionData\\DimensionData.csproj": {}
   },
   "projects": {
-    "E:\\DimensionDataProject\\DimensionData\\DimensionData\\DimensionData.csproj": {
+    "C:\\Users\\Carmen\\Desktop\\DimensionData\\DimensionData\\DimensionData.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\DimensionDataProject\\DimensionData\\DimensionData\\DimensionData.csproj",
+        "projectUniqueName": "C:\\Users\\Carmen\\Desktop\\DimensionData\\DimensionData\\DimensionData.csproj",
         "projectName": "DimensionData",
-        "projectPath": "E:\\DimensionDataProject\\DimensionData\\DimensionData\\DimensionData.csproj",
+        "projectPath": "C:\\Users\\Carmen\\Desktop\\DimensionData\\DimensionData\\DimensionData.csproj",
         "packagesPath": "C:\\Users\\Carmen\\.nuget\\packages\\",
-        "outputPath": "E:\\DimensionDataProject\\DimensionData\\DimensionData\\obj\\",
+        "outputPath": "C:\\Users\\Carmen\\Desktop\\DimensionData\\DimensionData\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -42,7 +42,15 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
+            "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
               "version": "[3.1.9, )"
             },
@@ -63,10 +71,6 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.4, )"
-            },
-            "System.Data.SqlClient": {
-              "target": "Package",
-              "version": "[4.8.2, )"
             }
           },
           "imports": [
