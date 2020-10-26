@@ -22,7 +22,6 @@ namespace DimensionData.Controllers
         // GET: Employees
         public async Task<IActionResult> Index()
         {
-            //var dimensionDataContext = _context.Employee.Include(e => e.Edu).Include(e => e.Emp).Include(e => e.EmpHistory).Include(e => e.EmpPerformance).Include(e => e.Job).Include(e => e.Pay).Include(e => e.Survey);
             var dimensionDataContext = _context.Employee.Include(e => e.Edu).Include(e => e.Emp).Include(e => e.Job).Include(e => e.Job);
             return View(await dimensionDataContext.ToListAsync());
         }
@@ -36,14 +35,15 @@ namespace DimensionData.Controllers
             }
 
             var employee = await _context.Employee
-                .Include(e => e.Edu)
-                .Include(e => e.Emp)
-                .Include(e => e.EmpHistory)
-                .Include(e => e.EmpPerformance)
-                .Include(e => e.Job)
-                .Include(e => e.Pay)
-                .Include(e => e.Survey)
-                .FirstOrDefaultAsync(m => m.EmployeeNumber == id);
+               .Include(e => e.Emp)
+               .Include(e => e.Edu)
+               .Include(e => e.EmpHistory)
+               .Include(e => e.Job)
+               .Include(e => e.Pay)
+               .Include(e => e.Survey)
+               .Include(e => e.EmpPerformance)
+               .FirstOrDefaultAsync(m => m.EmployeeNumber == id);
+
             if (employee == null)
             {
                 return NotFound();
@@ -195,3 +195,40 @@ namespace DimensionData.Controllers
         }
     }
 }
+
+//var employee = await _context.Employee
+//    .Include(e => e.Emp.Gender)
+//    .Include(e => e.Emp.Age)
+//    .Include(e => e.Emp.MaritalStatus)
+//    .Include(e => e.Emp.Attrition)
+//    .Include(e => e.Emp.Over18)
+//    .Include(e => e.Emp.DistanceFromHome)
+//    .Include(e => e.Edu.Education)
+//    .Include(e => e.Edu.EducationField)
+//    .Include(e => e.EmpHistory.NumCompaniesWorked)
+//    .Include(e => e.EmpHistory.TotalWorkingYears)
+//    .Include(e => e.EmpHistory.YearsAtCompany)
+//    .Include(e => e.EmpHistory.YearsInCurrentRole)
+//    .Include(e => e.EmpHistory.YearsSinceLastPromotion)
+//    .Include(e => e.EmpHistory.YearsWithCurrManager)
+//    .Include(e => e.EmpHistory.TrainingTimesLastYear)
+//    .Include(e => e.Job.JobRole)
+//    .Include(e => e.Job.Department)
+//    .Include(e => e.Job.JobLevel)
+//    .Include(e => e.Job.StandardHours)
+//    .Include(e => e.Job.EmployeeCount)
+//    .Include(e => e.Job.BusinessTravel)
+//    .Include(e => e.Job.StockOptionLevel)
+//    .Include(e => e.Pay.HourlyRate)
+//    .Include(e => e.Pay.DailyRate)
+//    .Include(e => e.Pay.MonthlyRate)
+//    .Include(e => e.Pay.MonthlyIncome)
+//    .Include(e => e.Pay.OverTime)
+//    .Include(e => e.Pay.PercentSalaryHike)
+//    .Include(e => e.Survey.EnvironmentSatisfaction)
+//    .Include(e => e.Survey.JobSatisfaction)
+//    .Include(e => e.Survey.RelationshipSatisfaction)
+//    .Include(e => e.EmpPerformance.PerformanceRating)
+//    .Include(e => e.EmpPerformance.WorkLifeBalance)
+//    .Include(e => e.EmpPerformance.JobInvolvement)
+//    .FirstOrDefaultAsync(m => m.EmployeeNumber == id);

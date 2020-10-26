@@ -10,47 +10,209 @@
     <h4>Employee</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Edu)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Emp.Gender)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Edu.EduId)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Emp.Gender)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Emp)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Emp.EmpId)
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Emp.Age)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EmpHistory)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EmpHistory.EmpHistoryId)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Emp.Age)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.EmpPerformance)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Emp.MaritalStatus)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.EmpPerformance.EmpPerformanceId)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Emp.MaritalStatus)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Job)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Job.JobId)
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Emp.Attrition)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Pay)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Pay.PayId)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Emp.Attrition)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Survey)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Emp.Over18)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Survey.SurveyId)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Emp.Over18)
+        </dd>
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Emp.DistanceFromHome)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Emp.DistanceFromHome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Edu.Education)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Edu.Education)
+        </dd>
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Edu.EducationField)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Edu.EducationField)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EmpHistory.NumCompaniesWorked)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EmpHistory.NumCompaniesWorked)
+        </dd>
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EmpHistory.TotalWorkingYears)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EmpHistory.TotalWorkingYears)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EmpHistory.YearsAtCompany)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EmpHistory.YearsAtCompany)
+        </dd>
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EmpHistory.YearsInCurrentRole)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EmpHistory.YearsInCurrentRole)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EmpHistory.YearsSinceLastPromotion)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EmpHistory.YearsSinceLastPromotion)
+        </dd>
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EmpHistory.YearsWithCurrManager)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EmpHistory.YearsWithCurrManager)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EmpHistory.TrainingTimesLastYear)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EmpHistory.TrainingTimesLastYear)
+        </dd>
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Job.JobRole)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Job.JobRole)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Job.Department)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Job.Department)
+        </dd>
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Job.JobLevel)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Job.JobLevel)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Job.StandardHours)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Job.StandardHours)
+        </dd>
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Job.EmployeeCount)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Job.EmployeeCount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Job.BusinessTravel)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Job.BusinessTravel)
+        </dd>
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Job.StockOptionLevel)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Job.StockOptionLevel)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pay.HourlyRate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pay.HourlyRate)
+        </dd>
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pay.DailyRate)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pay.DailyRate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pay.MonthlyRate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pay.MonthlyRate)
+        </dd>
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pay.MonthlyIncome)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pay.MonthlyIncome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pay.OverTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pay.OverTime)
+        </dd>
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pay.PercentSalaryHike)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pay.PercentSalaryHike)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Survey.EnvironmentSatisfaction)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Survey.EnvironmentSatisfaction)
+        </dd>
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Survey.JobSatisfaction)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Survey.JobSatisfaction)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Survey.RelationshipSatisfaction)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Survey.RelationshipSatisfaction)
+        </dd>
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EmpPerformance.PerformanceRating)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EmpPerformance.PerformanceRating)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EmpPerformance.WorkLifeBalance)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EmpPerformance.WorkLifeBalance)
+        </dd>
+        <dd class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EmpPerformance.JobInvolvement)
+        </dd>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EmpPerformance.JobInvolvement)
         </dd>
     </dl>
 </div>
