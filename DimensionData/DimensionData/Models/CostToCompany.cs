@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DimensionData.Models
 {
@@ -10,6 +12,8 @@ namespace DimensionData.Models
             Employee = new HashSet<Employee>();
         }
 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PayId { get; set; }
         public decimal? HourlyRate { get; set; }
         public decimal? MonthlyRate { get; set; }

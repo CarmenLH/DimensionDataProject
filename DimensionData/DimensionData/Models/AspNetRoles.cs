@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace DimensionData.Models
 {
@@ -11,6 +12,7 @@ namespace DimensionData.Models
             AspNetUserRoles = new HashSet<AspNetUserRoles>();
         }
 
+        [Key]
         public string Id { get; set; }
         public string Name { get; set; }
         public string NormalizedName { get; set; }

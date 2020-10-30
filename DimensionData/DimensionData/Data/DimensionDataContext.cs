@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using DimensionData.Models;
+using System.Threading.Tasks;
 
 namespace DimensionData.Data
 {
@@ -32,269 +33,268 @@ namespace DimensionData.Data
         public virtual DbSet<JobInformation> JobInformation { get; set; }
         public virtual DbSet<Surveys> Surveys { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Initial Catalog=DimensionData;Data Source=DESKTOP-SS18BBC\\SQLEXPRESS;Trusted_Connection=true");
-            }
-        }
+        
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<AspNetRoleClaims>(entity =>
-            {
-                entity.HasIndex(e => e.RoleId);
 
-                entity.Property(e => e.RoleId).IsRequired();
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
+        //        optionsBuilder.UseSqlServer("Initial Catalog=DimensionData;Data Source=DESKTOP-SS18BBC\\SQLEXPRESS;Trusted_Connection=true");
+        //    }
+        //}
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<AspNetRoleClaims>(entity =>
+        //    {
+        //        entity.HasIndex(e => e.RoleId);
 
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.AspNetRoleClaims)
-                    .HasForeignKey(d => d.RoleId);
-            });
+        //        entity.Property(e => e.RoleId).IsRequired();
 
-            modelBuilder.Entity<AspNetRoles>(entity =>
-            {
-                entity.HasIndex(e => e.NormalizedName)
-                    .HasName("RoleNameIndex")
-                    .IsUnique()
-                    .HasFilter("([NormalizedName] IS NOT NULL)");
+        //        entity.HasOne(d => d.Role)
+        //            .WithMany(p => p.AspNetRoleClaims)
+        //            .HasForeignKey(d => d.RoleId);
+        //    });
 
-                entity.Property(e => e.Name).HasMaxLength(256);
+        //    modelBuilder.Entity<AspNetRoles>(entity =>
+        //    {
+        //        entity.HasIndex(e => e.NormalizedName)
+        //            .HasName("RoleNameIndex")
+        //            .IsUnique()
+        //            .HasFilter("([NormalizedName] IS NOT NULL)");
 
-                entity.Property(e => e.NormalizedName).HasMaxLength(256);
-            });
+        //        entity.Property(e => e.Name).HasMaxLength(256);
 
-            modelBuilder.Entity<AspNetUserClaims>(entity =>
-            {
-                entity.HasIndex(e => e.UserId);
+        //        entity.Property(e => e.NormalizedName).HasMaxLength(256);
+        //    });
 
-                entity.Property(e => e.UserId).IsRequired();
+        //    modelBuilder.Entity<AspNetUserClaims>(entity =>
+        //    {
+        //        entity.HasIndex(e => e.UserId);
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserClaims)
-                    .HasForeignKey(d => d.UserId);
-            });
+        //        entity.Property(e => e.UserId).IsRequired();
 
-            modelBuilder.Entity<AspNetUserLogins>(entity =>
-            {
-                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
+        //        entity.HasOne(d => d.User)
+        //            .WithMany(p => p.AspNetUserClaims)
+        //            .HasForeignKey(d => d.UserId);
+        //    });
 
-                entity.HasIndex(e => e.UserId);
+        //    modelBuilder.Entity<AspNetUserLogins>(entity =>
+        //    {
+        //        entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
 
-                entity.Property(e => e.LoginProvider).HasMaxLength(128);
+        //        entity.HasIndex(e => e.UserId);
 
-                entity.Property(e => e.ProviderKey).HasMaxLength(128);
+        //        entity.Property(e => e.LoginProvider).HasMaxLength(128);
 
-                entity.Property(e => e.UserId).IsRequired();
+        //        entity.Property(e => e.ProviderKey).HasMaxLength(128);
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserLogins)
-                    .HasForeignKey(d => d.UserId);
-            });
+        //        entity.Property(e => e.UserId).IsRequired();
 
-            modelBuilder.Entity<AspNetUserRoles>(entity =>
-            {
-                entity.HasKey(e => new { e.UserId, e.RoleId });
+        //        entity.HasOne(d => d.User)
+        //            .WithMany(p => p.AspNetUserLogins)
+        //            .HasForeignKey(d => d.UserId);
+        //    });
 
-                entity.HasIndex(e => e.RoleId);
+        //    modelBuilder.Entity<AspNetUserRoles>(entity =>
+        //    {
+        //        entity.HasKey(e => new { e.UserId, e.RoleId });
 
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.AspNetUserRoles)
-                    .HasForeignKey(d => d.RoleId);
+        //        entity.HasIndex(e => e.RoleId);
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserRoles)
-                    .HasForeignKey(d => d.UserId);
-            });
+        //        entity.HasOne(d => d.Role)
+        //            .WithMany(p => p.AspNetUserRoles)
+        //            .HasForeignKey(d => d.RoleId);
 
-            modelBuilder.Entity<AspNetUserTokens>(entity =>
-            {
-                entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
+        //        entity.HasOne(d => d.User)
+        //            .WithMany(p => p.AspNetUserRoles)
+        //            .HasForeignKey(d => d.UserId);
+        //    });
 
-                entity.Property(e => e.LoginProvider).HasMaxLength(128);
+        //    modelBuilder.Entity<AspNetUserTokens>(entity =>
+        //    {
+        //        entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
 
-                entity.Property(e => e.Name).HasMaxLength(128);
+        //        entity.Property(e => e.LoginProvider).HasMaxLength(128);
 
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.AspNetUserTokens)
-                    .HasForeignKey(d => d.UserId);
-            });
+        //        entity.Property(e => e.Name).HasMaxLength(128);
 
-            modelBuilder.Entity<AspNetUsers>(entity =>
-            {
-                entity.HasIndex(e => e.NormalizedEmail)
-                    .HasName("EmailIndex");
+        //        entity.HasOne(d => d.User)
+        //            .WithMany(p => p.AspNetUserTokens)
+        //            .HasForeignKey(d => d.UserId);
+        //    });
 
-                entity.HasIndex(e => e.NormalizedUserName)
-                    .HasName("UserNameIndex")
-                    .IsUnique()
-                    .HasFilter("([NormalizedUserName] IS NOT NULL)");
+        //    modelBuilder.Entity<AspNetUsers>(entity =>
+        //    {
+        //        entity.HasIndex(e => e.NormalizedEmail)
+        //            .HasName("EmailIndex");
 
-                entity.Property(e => e.Email).HasMaxLength(256);
+        //        entity.HasIndex(e => e.NormalizedUserName)
+        //            .HasName("UserNameIndex")
+        //            .IsUnique()
+        //            .HasFilter("([NormalizedUserName] IS NOT NULL)");
 
-                entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
+        //        entity.Property(e => e.Email).HasMaxLength(256);
 
-                entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
+        //        entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
 
-                entity.Property(e => e.UserName).HasMaxLength(256);
-            });
+        //        entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
 
-            modelBuilder.Entity<CostToCompany>(entity =>
-            {
-                entity.HasKey(e => e.PayId);
+        //        entity.Property(e => e.UserName).HasMaxLength(256);
+        //    });
 
-                entity.Property(e => e.PayId).ValueGeneratedNever();
+        //    modelBuilder.Entity<CostToCompany>(entity =>
+        //    {
+        //        entity.HasKey(e => e.PayId);
 
-                entity.Property(e => e.DailyRate).HasColumnType("money");
+        //        entity.Property(e => e.PayId).ValueGeneratedNever();
 
-                entity.Property(e => e.HourlyRate).HasColumnType("money");
+        //        entity.Property(e => e.DailyRate).HasColumnType("money");
 
-                entity.Property(e => e.MonthlyIncome).HasColumnType("money");
+        //        entity.Property(e => e.HourlyRate).HasColumnType("money");
 
-                entity.Property(e => e.MonthlyRate).HasColumnType("money");
+        //        entity.Property(e => e.MonthlyIncome).HasColumnType("money");
 
-                entity.Property(e => e.PercentSalaryHike).HasColumnType("money");
-            });
+        //        entity.Property(e => e.MonthlyRate).HasColumnType("money");
 
-            modelBuilder.Entity<Employee>(entity =>
-            {
-                entity.HasKey(e => e.EmployeeNumber);
+        //        entity.Property(e => e.PercentSalaryHike).HasColumnType("money");
+        //    });
 
-                entity.Property(e => e.EmployeeNumber).ValueGeneratedNever();
+        //    modelBuilder.Entity<Employee>(entity =>
+        //    {
+        //        entity.HasKey(e => e.EmployeeNumber);
 
-                entity.Property(e => e.EduId).HasColumnName("EduID");
+        //        entity.Property(e => e.EmployeeNumber).ValueGeneratedNever();
 
-                entity.Property(e => e.EmpHistoryId).HasColumnName("empHistoryID");
+        //        entity.Property(e => e.EduId).HasColumnName("EduID");
 
-                entity.Property(e => e.EmpId).HasColumnName("EmpID");
+        //        entity.Property(e => e.EmpHistoryId).HasColumnName("empHistoryID");
 
-                entity.Property(e => e.EmpPerformanceId).HasColumnName("empPerformanceID");
+        //        entity.Property(e => e.EmpId).HasColumnName("EmpID");
 
-                entity.Property(e => e.JobId).HasColumnName("JobID");
+        //        entity.Property(e => e.EmpPerformanceId).HasColumnName("empPerformanceID");
 
-                entity.Property(e => e.PayId).HasColumnName("PayID");
+        //        entity.Property(e => e.JobId).HasColumnName("JobID");
 
-                entity.Property(e => e.SurveyId).HasColumnName("SurveyID");
+        //        entity.Property(e => e.PayId).HasColumnName("PayID");
 
-                entity.HasOne(d => d.Edu)
-                    .WithMany(p => p.Employee)
-                    .HasForeignKey(d => d.EduId)
-                    .HasConstraintName("FK_Employee_EmployeeEducation");
+        //        entity.Property(e => e.SurveyId).HasColumnName("SurveyID");
 
-                entity.HasOne(d => d.EmpHistory)
-                    .WithMany(p => p.Employee)
-                    .HasForeignKey(d => d.EmpHistoryId)
-                    .HasConstraintName("FK_Employee_EmployeeHistory");
+        //        entity.HasOne(d => d.Edu)
+        //            .WithMany(p => p.Employee)
+        //            .HasForeignKey(d => d.EduId)
+        //            .HasConstraintName("FK_Employee_EmployeeEducation");
 
-                entity.HasOne(d => d.Emp)
-                    .WithMany(p => p.Employee)
-                    .HasForeignKey(d => d.EmpId)
-                    .HasConstraintName("FK_Employee_EmployeeDetails");
+        //        entity.HasOne(d => d.EmpHistory)
+        //            .WithMany(p => p.Employee)
+        //            .HasForeignKey(d => d.EmpHistoryId)
+        //            .HasConstraintName("FK_Employee_EmployeeHistory");
 
-                entity.HasOne(d => d.EmpPerformance)
-                    .WithMany(p => p.Employee)
-                    .HasForeignKey(d => d.EmpPerformanceId)
-                    .HasConstraintName("FK_Employee_EmployeePerformance");
+        //        entity.HasOne(d => d.Emp)
+        //            .WithMany(p => p.Employee)
+        //            .HasForeignKey(d => d.EmpId)
+        //            .HasConstraintName("FK_Employee_EmployeeDetails");
 
-                entity.HasOne(d => d.Job)
-                    .WithMany(p => p.Employee)
-                    .HasForeignKey(d => d.JobId)
-                    .HasConstraintName("FK_Employee_JobInformation");
+        //        entity.HasOne(d => d.EmpPerformance)
+        //            .WithMany(p => p.Employee)
+        //            .HasForeignKey(d => d.EmpPerformanceId)
+        //            .HasConstraintName("FK_Employee_EmployeePerformance");
 
-                entity.HasOne(d => d.Pay)
-                    .WithMany(p => p.Employee)
-                    .HasForeignKey(d => d.PayId)
-                    .HasConstraintName("FK_Employee_CostToCompany");
+        //        entity.HasOne(d => d.Job)
+        //            .WithMany(p => p.Employee)
+        //            .HasForeignKey(d => d.JobId)
+        //            .HasConstraintName("FK_Employee_JobInformation");
 
-                entity.HasOne(d => d.Survey)
-                    .WithMany(p => p.Employee)
-                    .HasForeignKey(d => d.SurveyId)
-                    .HasConstraintName("FK_Employee_Surveys");
-            });
+        //        entity.HasOne(d => d.Pay)
+        //            .WithMany(p => p.Employee)
+        //            .HasForeignKey(d => d.PayId)
+        //            .HasConstraintName("FK_Employee_CostToCompany");
 
-            modelBuilder.Entity<EmployeeDetails>(entity =>
-            {
-                entity.HasKey(e => e.EmpId);
+        //        entity.HasOne(d => d.Survey)
+        //            .WithMany(p => p.Employee)
+        //            .HasForeignKey(d => d.SurveyId)
+        //            .HasConstraintName("FK_Employee_Surveys");
+        //    });
 
-                entity.Property(e => e.EmpId)
-                    .HasColumnName("EmpID")
-                    .ValueGeneratedNever();
+        //    modelBuilder.Entity<EmployeeDetails>(entity =>
+        //    {
+        //        entity.HasKey(e => e.EmpId);
 
-                entity.Property(e => e.Gender)
-                    .HasMaxLength(15)
-                    .IsUnicode(false);
+        //        entity.Property(e => e.EmpId)
+        //            .HasColumnName("EmpID")
+        //            .ValueGeneratedNever();
 
-                entity.Property(e => e.MaritalStatus)
-                    .HasMaxLength(15)
-                    .IsUnicode(false);
-            });
+        //        entity.Property(e => e.Gender)
+        //            .HasMaxLength(15)
+        //            .IsUnicode(false);
 
-            modelBuilder.Entity<EmployeeEducation>(entity =>
-            {
-                entity.HasKey(e => e.EduId);
+        //        entity.Property(e => e.MaritalStatus)
+        //            .HasMaxLength(15)
+        //            .IsUnicode(false);
+        //    });
 
-                entity.Property(e => e.EduId)
-                    .HasColumnName("EduID")
-                    .ValueGeneratedNever();
+        //    modelBuilder.Entity<EmployeeEducation>(entity =>
+        //    {
+        //        entity.HasKey(e => e.EduId);
 
-                entity.Property(e => e.EducationField)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-            });
+        //        entity.Property(e => e.EduId)
+        //            .HasColumnName("EduID")
+        //            .ValueGeneratedNever();
 
-            modelBuilder.Entity<EmployeeHistory>(entity =>
-            {
-                entity.HasKey(e => e.EmpHistoryId);
+        //        entity.Property(e => e.EducationField)
+        //            .HasMaxLength(50)
+        //            .IsUnicode(false);
+        //    });
 
-                entity.Property(e => e.EmpHistoryId)
-                    .HasColumnName("empHistoryID")
-                    .ValueGeneratedNever();
-            });
+        //    modelBuilder.Entity<EmployeeHistory>(entity =>
+        //    {
+        //        entity.HasKey(e => e.EmpHistoryId);
 
-            modelBuilder.Entity<EmployeePerformance>(entity =>
-            {
-                entity.HasKey(e => e.EmpPerformanceId);
+        //        entity.Property(e => e.EmpHistoryId)
+        //            .HasColumnName("empHistoryID")
+        //            .ValueGeneratedNever();
+        //    });
 
-                entity.Property(e => e.EmpPerformanceId)
-                    .HasColumnName("empPerformanceID")
-                    .ValueGeneratedNever();
-            });
+        //    modelBuilder.Entity<EmployeePerformance>(entity =>
+        //    {
+        //        entity.HasKey(e => e.EmpPerformanceId);
 
-            modelBuilder.Entity<JobInformation>(entity =>
-            {
-                entity.HasKey(e => e.JobId);
+        //        entity.Property(e => e.EmpPerformanceId)
+        //            .HasColumnName("empPerformanceID")
+        //            .ValueGeneratedNever();
+        //    });
 
-                entity.Property(e => e.JobId)
-                    .HasColumnName("JobID")
-                    .ValueGeneratedNever();
+        //    modelBuilder.Entity<JobInformation>(entity =>
+        //    {
+        //        entity.HasKey(e => e.JobId);
 
-                entity.Property(e => e.BusinessTravel)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+        //        entity.Property(e => e.JobId)
+        //            .HasColumnName("JobID")
+        //            .ValueGeneratedNever();
 
-                entity.Property(e => e.Department)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+        //        entity.Property(e => e.BusinessTravel)
+        //            .HasMaxLength(50)
+        //            .IsUnicode(false);
 
-                entity.Property(e => e.JobRole)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-            });
+        //        entity.Property(e => e.Department)
+        //            .HasMaxLength(50)
+        //            .IsUnicode(false);
 
-            modelBuilder.Entity<Surveys>(entity =>
-            {
-                entity.HasKey(e => e.SurveyId);
+        //        entity.Property(e => e.JobRole)
+        //            .HasMaxLength(50)
+        //            .IsUnicode(false);
+        //    });
 
-                entity.Property(e => e.SurveyId)
-                    .HasColumnName("SurveyID")
-                    .ValueGeneratedNever();
-            });
+        //    modelBuilder.Entity<Surveys>(entity =>
+        //    {
+        //        entity.HasKey(e => e.SurveyId);
 
-            OnModelCreatingPartial(modelBuilder);
-        }
+        //        entity.Property(e => e.SurveyId)
+        //            .HasColumnName("SurveyID")
+        //            .ValueGeneratedNever();
+        //    });
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        //    OnModelCreatingPartial(modelBuilder);
+        //}
     }
 }
