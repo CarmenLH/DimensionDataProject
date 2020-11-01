@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Carmen\\Desktop\\DimensionData\\DimensionData\\DimensionData.csproj": {}
+    "E:\\DimensionDataProject\\DimensionData\\DimensionData\\DimensionData.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Carmen\\Desktop\\DimensionData\\DimensionData\\DimensionData.csproj": {
+    "E:\\DimensionDataProject\\DimensionData\\DimensionData\\DimensionData.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Carmen\\Desktop\\DimensionData\\DimensionData\\DimensionData.csproj",
+        "projectUniqueName": "E:\\DimensionDataProject\\DimensionData\\DimensionData\\DimensionData.csproj",
         "projectName": "DimensionData",
-        "projectPath": "C:\\Users\\Carmen\\Desktop\\DimensionData\\DimensionData\\DimensionData.csproj",
+        "projectPath": "E:\\DimensionDataProject\\DimensionData\\DimensionData\\DimensionData.csproj",
         "packagesPath": "C:\\Users\\Carmen\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Carmen\\Desktop\\DimensionData\\DimensionData\\obj\\",
+        "outputPath": "E:\\DimensionDataProject\\DimensionData\\DimensionData\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"

@@ -48,7 +48,7 @@
                 <span asp-validation-for="EmpHistory.YearsAtCompany" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
-                <label class="form-check-label">
+                <label asp-for="Emp.Attrition" class="form-check-label">
                     <input class="form-check-input" asp-for="Emp.Attrition" /> @Html.DisplayNameFor(model => model.Emp.Attrition)
                 </label>
             </div>
@@ -126,12 +126,12 @@
                 <span asp-validation-for="EmpHistory.NumCompaniesWorked" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
-                <label class="form-check-label">
+                <label asp-for="Emp.Over18" class="form-check-label">
                     <input class="form-check-input" asp-for="Emp.Over18" /> @Html.DisplayNameFor(model => model.Emp.Over18)
                 </label>
             </div>
             <div class="form-group form-check">
-                <label class="form-check-label">
+                <label asp-for="Pay.OverTime" class="form-check-label">
                     <input class="form-check-input" asp-for="Pay.OverTime" /> @Html.DisplayNameFor(model => model.Pay.OverTime)
                 </label>
             </div>

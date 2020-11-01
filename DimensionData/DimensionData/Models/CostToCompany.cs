@@ -21,7 +21,7 @@ namespace DimensionData.Models
         [DataType(DataType.Currency)]
         public decimal? DailyRate { get; set; }
         [DataType(DataType.Currency)]
-        public bool? OverTime { get; set; }
+        public bool OverTime { get; set; }
         [DataType(DataType.Currency)]
         public decimal? PercentSalaryHike { get; set; }
 
