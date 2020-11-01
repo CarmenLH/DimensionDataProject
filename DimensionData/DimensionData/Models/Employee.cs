@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DimensionData.Models
 {
     public partial class Employee
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int EmployeeNumber { get; set; }
         public int PayId { get; set; }
         public int EmpId { get; set; }

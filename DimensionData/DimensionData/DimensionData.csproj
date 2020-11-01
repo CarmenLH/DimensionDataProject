@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>aspnet-DimensionData-34C3F777-2865-4444-B80F-108957D63A7E</UserSecretsId>
-	  <GenerateRuntimeConfigurationFiles>True</GenerateRuntimeConfigurationFiles>
+    <UserSecretsId>aspnet-DimensionData-3D157582-6B47-449B-A1F0-1C6D8B284399</UserSecretsId>
+	<GenerateRuntimeConfigurationFiles>True</GenerateRuntimeConfigurationFiles>
   </PropertyGroup>
 
   <ItemGroup>

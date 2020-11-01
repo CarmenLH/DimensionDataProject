@@ -7,14 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DimensionData.Data;
 using DimensionData.Models;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System.Security.Cryptography.X509Certificates;
 
 namespace DimensionData.Controllers
 {
     public class EmployeesController : Controller
     {
         private readonly DimensionDataContext _context;
+
         public EmployeesController(DimensionDataContext context)
         {
             _context = context;
@@ -23,15 +22,9 @@ namespace DimensionData.Controllers
         // GET: Employees
         public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
-            //public async Task<IActionResult> Index()
-            //{
-            //    var dimensionDataContext = _context.Employee.Include(e => e.Edu).Include(e => e.Emp).Include(e => e.Job).Include(e => e.Job);
-            //    return View(await dimensionDataContext.ToListAsync());
-            //}
-
             //Define sorting for each column
             ViewData["CurrentSort"] = sortOrder;
-            ViewData["EmpNrSortParam"] = sortOrder == "empnr_desc" ? "EmpNr" : "empnr_desc"; 
+            ViewData["EmpNrSortParam"] = sortOrder == "empnr_desc" ? "EmpNr" : "empnr_desc";
             ViewData["EmpAgeSortParam"] = sortOrder == "empage_desc" ? "EmpAge" : "empage_desc";
             ViewData["JobLevelSortParam"] = sortOrder == "joblevel_desc" ? "JobLevel" : "joblevel_desc";
             ViewData["JobRoleSortParam"] = sortOrder == "jobrole_desc" ? "JobRole" : "jobrole_desc";
@@ -141,13 +134,6 @@ namespace DimensionData.Controllers
             ViewData["Gender"] = new SelectList(_context.EmployeeDetails.Select(x => x.Gender).Distinct());
             ViewData["Department"] = new SelectList(_context.JobInformation.Select(x => x.Department).Distinct());
 
-            //ViewData["EduId"] = new SelectList(_context.EmployeeEducation, "EduId", "EduId");
-            //ViewData["EmpId"] = new SelectList(_context.EmployeeDetails, "EmpId", "EmpId");
-            //ViewData["EmpHistoryId"] = new SelectList(_context.EmployeeHistory, "EmpHistoryId", "EmpHistoryId");
-            //ViewData["EmpPerformanceId"] = new SelectList(_context.EmployeePerformance, "EmpPerformanceId", "EmpPerformanceId");
-            //ViewData["JobId"] = new SelectList(_context.JobInformation, "JobId", "JobId");
-            //ViewData["PayId"] = new SelectList(_context.CostToCompany, "PayId", "PayId");
-            //ViewData["SurveyId"] = new SelectList(_context.Surveys, "SurveyId", "SurveyId");
             return View();
         }
 
@@ -158,45 +144,51 @@ namespace DimensionData.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Employee employee)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    _context.Add(employee);
-            //    await _context.SaveChangesAsync();
-            //    return RedirectToAction(nameof(Index));
-            //}
-            //return View(employee);
+            _context.Employee.Add(employee);
 
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (EmployeeExists(employee.EmployeeNumber))
+                {
+                    return Conflict();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-            _context.Add(employee);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", new { id = employee.EmployeeNumber });
         }
 
         // GET: Employees/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var employee = await _context.Employee
+           .Include(e => e.Emp)
+           .Include(e => e.Edu)
+           .Include(e => e.EmpHistory)
+           .Include(e => e.Job)
+           .Include(e => e.Pay)
+           .Include(e => e.Survey)
+           .Include(e => e.EmpPerformance)
+           .FirstOrDefaultAsync(m => m.EmployeeNumber == id);
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
             ViewData["EducationField"] = new SelectList(_context.EmployeeEducation.Select(x => x.EducationField).Distinct());
             ViewData["BusinessTravel"] = new SelectList(_context.JobInformation.Select(x => x.BusinessTravel).Distinct());
             ViewData["MaritalStatus"] = new SelectList(_context.EmployeeDetails.Select(x => x.MaritalStatus).Distinct());
             ViewData["JobRole"] = new SelectList(_context.JobInformation.Select(x => x.JobRole).Distinct());
             ViewData["Gender"] = new SelectList(_context.EmployeeDetails.Select(x => x.Gender).Distinct());
             ViewData["Department"] = new SelectList(_context.JobInformation.Select(x => x.Department).Distinct());
-
-
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var employee = await _context.Employee
-            .Include(e => e.Emp)
-            .Include(e => e.Edu)
-            .Include(e => e.EmpHistory)
-            .Include(e => e.Job)
-            .Include(e => e.Pay)
-            .Include(e => e.Survey)
-            .Include(e => e.EmpPerformance)
-            .FirstOrDefaultAsync(m => m.EmployeeNumber == id);
 
             return View(employee);
         }
@@ -208,16 +200,6 @@ namespace DimensionData.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int? id, Employee employee)
         {
-            employee = await _context.Employee
-            .Include(e => e.Emp)
-            .Include(e => e.Edu)
-            .Include(e => e.EmpHistory)
-            .Include(e => e.Job)
-            .Include(e => e.Pay)
-            .Include(e => e.Survey)
-            .Include(e => e.EmpPerformance)
-            .FirstOrDefaultAsync(m => m.EmployeeNumber == id);
-
             if (id != employee.EmployeeNumber)
             {
                 return NotFound();
@@ -243,13 +225,7 @@ namespace DimensionData.Controllers
                 }
                 return RedirectToAction("Index");
             }
-            //ViewData["EduId"] = new SelectList(_context.EmployeeEducation, "EduId", "EduId", employee.EduId);
-            //ViewData["EmpId"] = new SelectList(_context.EmployeeDetails, "EmpId", "EmpId", employee.EmpId);
-            //ViewData["EmpHistoryId"] = new SelectList(_context.EmployeeHistory, "EmpHistoryId", "EmpHistoryId", employee.EmpHistoryId);
-            //ViewData["EmpPerformanceId"] = new SelectList(_context.EmployeePerformance, "EmpPerformanceId", "EmpPerformanceId", employee.EmpPerformanceId);
-            //ViewData["JobId"] = new SelectList(_context.JobInformation, "JobId", "JobId", employee.JobId);
-            //ViewData["PayId"] = new SelectList(_context.CostToCompany, "PayId", "PayId", employee.PayId);
-            //ViewData["SurveyId"] = new SelectList(_context.Surveys, "SurveyId", "SurveyId", employee.SurveyId);
+
             return View(employee);
         }
 
