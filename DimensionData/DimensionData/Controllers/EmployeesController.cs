@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DimensionData.Data;
 using DimensionData.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DimensionData.Controllers
 {
