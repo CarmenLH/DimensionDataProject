@@ -2,13 +2,13 @@
 @model PaginatedList<DimensionData.Models.Employee>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Employee Details";
 }
 
-<h1>Index</h1>
+<h1>Employee Details</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New Employee</a>
 </p>
 
 <form asp-action="Index" method="get">
@@ -25,27 +25,21 @@
     <thead>
         <tr>
             <th>
-                @*@Html.DisplayNameFor(model =>  model.EmployeeNumber)*@
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["EmpNrSortParam"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Employee Number</a>
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.Gender)*@
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["GenderSortParam"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Gender</a>
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.Age)*@
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["EmpAgeSortParam"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Age</a>
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.Department)*@
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["DepSortParam"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Department</a>
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.JobRole)*@
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["JobRoleSortParam"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Job Role</a>
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.JobLevel)*@
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["JobLevelSortParam"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Job Level</a>
             </th>
             <th></th>

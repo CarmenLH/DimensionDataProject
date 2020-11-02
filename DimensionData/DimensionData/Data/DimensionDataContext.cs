@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using DimensionData.Models;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace DimensionData.Data
 {
@@ -16,6 +18,7 @@ namespace DimensionData.Data
         {
         }
 
+        #region Table Db Sets
         public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
@@ -31,6 +34,185 @@ namespace DimensionData.Data
         public virtual DbSet<EmployeePerformance> EmployeePerformance { get; set; }
         public virtual DbSet<JobInformation> JobInformation { get; set; }
         public virtual DbSet<Surveys> Surveys { get; set; }
+        #endregion Table Db Sets
+
+        #region SQL queries for Data
+
+        //Get All employee information with pagination
+        public async Task<PaginatedList<Employee>> GetAllPagination(string sortOrder, string currentFilter, string searchString, int? pageNumber)
+        {
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            var employees = from s in Employee.Include(e => e.Edu).Include(e => e.Emp).Include(e => e.Job) select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                employees = employees.Where(s => s.Job.Department.Contains(searchString)
+                                       || s.Job.JobRole.Contains(searchString));
+            }
+
+            //Individual Sorting for each column
+            switch (sortOrder)
+            {
+                case "EmpNr":
+                    employees = employees.OrderBy(s => s.EmployeeNumber);
+                    break;
+                case "empnr_desc":
+                    employees = employees.OrderByDescending(s => s.EmployeeNumber);
+                    break;
+                case "EmpAge":
+                    employees = employees.OrderBy(s => s.Emp.Age);
+                    break;
+                case "empage_desc":
+                    employees = employees.OrderByDescending(s => s.Emp.Age);
+                    break;
+                case "JobLevel":
+                    employees = employees.OrderBy(s => s.Job.JobLevel);
+                    break;
+                case "joblevel_desc":
+                    employees = employees.OrderByDescending(s => s.Job.JobLevel);
+                    break;
+                case "JobRole":
+                    employees = employees.OrderBy(s => s.Job.JobRole);
+                    break;
+                case "jobrole_desc":
+                    employees = employees.OrderByDescending(s => s.Job.JobRole);
+                    break;
+                case "Dep":
+                    employees = employees.OrderBy(s => s.Job.Department);
+                    break;
+                case "dep_desc":
+                    employees = employees.OrderByDescending(s => s.Job.Department);
+                    break;
+                case "Gender":
+                    employees = employees.OrderBy(s => s.Emp.Gender);
+                    break;
+                case "gender_desc":
+                    employees = employees.OrderByDescending(s => s.Emp.Gender);
+                    break;
+                default:
+                    employees = employees.OrderBy(s => s.EmployeeNumber);
+                    break;
+            }
+
+            int pageSize = 10;
+            var pagedList = await PaginatedList<Employee>.CreateAsync(employees.AsNoTracking(), pageNumber ?? 1, pageSize);
+
+            return pagedList;
+        }
+
+        //Get the details of each employee by id
+        public async Task<Employee> GetbyIdAsync(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var employee = await Employee
+               .Include(e => e.Emp)
+               .Include(e => e.Edu)
+               .Include(e => e.EmpHistory)
+               .Include(e => e.Job)
+               .Include(e => e.Pay)
+               .Include(e => e.Survey)
+               .Include(e => e.EmpPerformance)
+               .FirstOrDefaultAsync(m => m.EmployeeNumber == id);
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            return employee;
+        }
+
+        //Edit the data of an employee
+        public async Task<Employee> UpdateAsync(int? id, Employee employee)
+        {
+            if (id != employee.EmployeeNumber)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                Update(employee);
+                await SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!EmployeeExists(employee.EmployeeNumber))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return employee;
+        }
+
+        //Create a new data entry
+        public async Task<Employee> CreateAsync(Employee employee)
+        {
+            try
+            {
+                Employee.Add(employee);
+                await SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                if (EmployeeExists(employee.EmployeeNumber))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return employee;
+        }
+
+        //Delete an existing data entry
+        public async Task<Employee> DeleteAsync(int? id)
+        {
+            try
+            {
+                var employee = await Employee.FindAsync(id);
+                Employee.Remove(employee);
+                await SaveChangesAsync();
+
+                return employee;
+            }
+            catch(DbUpdateConcurrencyException)
+            {
+                return NotFound();
+            }
+        }
+
+        //Exception methods
+        private Employee NotFound()
+        {
+            throw new NotImplementedException();
+        }
+        private bool EmployeeExists(int id)
+        {
+            return Employee.Any(e => e.EmployeeNumber == id);
+        }
+
+        #endregion SQL queries for Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -41,6 +223,7 @@ namespace DimensionData.Data
             }
         }
 
+        #region Model Builder 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AspNetRoleClaims>(entity =>
@@ -280,5 +463,6 @@ namespace DimensionData.Data
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        #endregion Model Builder 
     }
 }

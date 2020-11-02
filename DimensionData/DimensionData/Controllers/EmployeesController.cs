@@ -31,97 +31,15 @@ namespace DimensionData.Controllers
             ViewData["DepSortParam"] = sortOrder == "dep_desc" ? "Dep" : "dep_desc";
             ViewData["GenderSortParam"] = sortOrder == "gender_desc" ? "Gender" : "gender_desc";
 
-            //Ensure search string isnt empty
-            if (searchString != null)
-            {
-                pageNumber = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
             ViewData["CurrentFilter"] = searchString;
-            var employees = from s in _context.Employee.Include(e => e.Edu).Include(e => e.Emp).Include(e => e.Job) select s;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                employees = employees.Where(s => s.Job.Department.Contains(searchString)
-                                       || s.Job.JobRole.Contains(searchString));
-            }
-
-            //Individual Sorting for each column
-            switch (sortOrder)
-            {
-                case "EmpNr":
-                    employees = employees.OrderBy(s => s.EmployeeNumber);
-                    break;
-                case "empnr_desc":
-                    employees = employees.OrderByDescending(s => s.EmployeeNumber);
-                    break;
-                case "EmpAge":
-                    employees = employees.OrderBy(s => s.Emp.Age);
-                    break;
-                case "empage_desc":
-                    employees = employees.OrderByDescending(s => s.Emp.Age);
-                    break;
-                case "JobLevel":
-                    employees = employees.OrderBy(s => s.Job.JobLevel);
-                    break;
-                case "joblevel_desc":
-                    employees = employees.OrderByDescending(s => s.Job.JobLevel);
-                    break;
-                case "JobRole":
-                    employees = employees.OrderBy(s => s.Job.JobRole);
-                    break;
-                case "jobrole_desc":
-                    employees = employees.OrderByDescending(s => s.Job.JobRole);
-                    break;
-                case "Dep":
-                    employees = employees.OrderBy(s => s.Job.Department);
-                    break;
-                case "dep_desc":
-                    employees = employees.OrderByDescending(s => s.Job.Department);
-                    break;
-                case "Gender":
-                    employees = employees.OrderBy(s => s.Emp.Gender);
-                    break;
-                case "gender_desc":
-                    employees = employees.OrderByDescending(s => s.Emp.Gender);
-                    break;
-                default:
-                    employees = employees.OrderBy(s => s.EmployeeNumber);
-                    break;
-            }
-
-            int pageSize = 10;
-            return View(await PaginatedList<Employee>.CreateAsync(employees.AsNoTracking(), pageNumber ?? 1, pageSize));
+            
+            return View(await _context.GetAllPagination(sortOrder, currentFilter, searchString, pageNumber));
         }
 
         // GET: Employees/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var employee = await _context.Employee
-               .Include(e => e.Emp)
-               .Include(e => e.Edu)
-               .Include(e => e.EmpHistory)
-               .Include(e => e.Job)
-               .Include(e => e.Pay)
-               .Include(e => e.Survey)
-               .Include(e => e.EmpPerformance)
-               .FirstOrDefaultAsync(m => m.EmployeeNumber == id);
-
-            if (employee == null)
-            {
-                return NotFound();
-            }
-
-            return View(employee);
+            return View(await _context.GetbyIdAsync(id));
         }
 
         // GET: Employees/Create
@@ -138,31 +56,11 @@ namespace DimensionData.Controllers
         }
 
         // POST: Employees/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Employee employee)
         {
-            _context.Employee.Add(employee);
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (EmployeeExists(employee.EmployeeNumber))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToAction("Index", new { id = employee.EmployeeNumber });
+            return RedirectToAction("Index", await _context.CreateAsync(employee));
         }
 
         // GET: Employees/Edit/5
@@ -194,36 +92,13 @@ namespace DimensionData.Controllers
         }
 
         // POST: Employees/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int? id, Employee employee)
         {
-            if (id != employee.EmployeeNumber)
+            if(ModelState.IsValid)
             {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(employee);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EmployeeExists(employee.EmployeeNumber))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", await _context.UpdateAsync(id,employee));
             }
 
             return View(employee);
@@ -259,15 +134,15 @@ namespace DimensionData.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var employee = await _context.Employee.FindAsync(id);
-            _context.Employee.Remove(employee);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index", await _context.DeleteAsync(id));
         }
 
         private bool EmployeeExists(int id)
         {
             return _context.Employee.Any(e => e.EmployeeNumber == id);
         }
+
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     }
 }

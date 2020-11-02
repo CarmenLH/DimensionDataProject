@@ -1406,7 +1406,7 @@ $.extend( $.validator, {
 
 		// https://jqueryvalidation.org/number-method/
 		number: function( value, element ) {
-			return this.optional( element ) || /^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test( value );
+			return this.optional(element) || /^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:**[\\.,]**\d+)?$/.test(value);
 		},
 
 		// https://jqueryvalidation.org/digits-method/
@@ -1455,7 +1455,7 @@ $.extend( $.validator, {
 				re = new RegExp( "\\b" + type + "\\b" ),
 				notSupported = type && !re.test( supportedTypes.join() ),
 				decimalPlaces = function( num ) {
-					var match = ( "" + num ).match( /(?:\.(\d+))?$/ );
+					var match = ( "" + num ).match( /(?:\,(\d+))?$/ ); //HERE replaced . with ,
 					if ( !match ) {
 						return 0;
 					}
