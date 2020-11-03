@@ -351,9 +351,6 @@ E:\DimensionDataProject\DimensionData\DimensionData\bin\Debug\netcoreapp3.1\runt
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.csprojAssemblyReference.cache
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.AssemblyInfoInputs.cache
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.AssemblyInfo.cs
-E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.csproj.CoreCompileInputs.cache
-E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.MvcApplicationPartsAssemblyInfo.cs
-E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.MvcApplicationPartsAssemblyInfo.cache
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.RazorAssemblyInfo.cache
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.RazorAssemblyInfo.cs
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.TagHelpers.input.cache
@@ -422,3 +419,8 @@ E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razo
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\Role\CreateRoles.cshtml.g.cs
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\Role\RoleIndex.cshtml.g.cs
+E:\DimensionDataProject\DimensionData\DimensionData\bin\Debug\netcoreapp3.1\SendGrid.dll
+E:\DimensionDataProject\DimensionData\DimensionData\bin\Debug\netcoreapp3.1\StarkbankEcdsa.dll
+E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.csproj.CoreCompileInputs.cache
+E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.MvcApplicationPartsAssemblyInfo.cs
+E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.MvcApplicationPartsAssemblyInfo.cache
