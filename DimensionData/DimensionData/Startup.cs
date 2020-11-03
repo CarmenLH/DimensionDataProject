@@ -33,11 +33,27 @@ namespace DimensionData
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
+            //services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddDefaultUI()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>()
+            //    .AddDefaultTokenProviders();
+
             //For Role based identity
-            services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddDefaultUI()
+            //Add own custom token lifetime service
+            services.AddIdentity<IdentityUser,IdentityRole>(config =>
+            {
+                config.SignIn.RequireConfirmedEmail = true;
+                config.Tokens.ProviderMap.Add("CustomEmailConfirmation",
+                    new TokenProviderDescriptor(
+                        typeof(CustomEmailConfirmationTokenProvider<IdentityUser>)));
+                config.Tokens.EmailConfirmationTokenProvider = "CustomEmailConfirmation";
+            })
+                .AddDefaultUI() //For Role based identity
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+                .AddDefaultTokenProviders(); //For Role based identity
+
+            //Add own custom token lifetime service
+            services.AddTransient<CustomEmailConfirmationTokenProvider<IdentityUser>>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
