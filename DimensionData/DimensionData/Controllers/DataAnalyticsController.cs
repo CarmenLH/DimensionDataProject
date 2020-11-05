@@ -29,21 +29,54 @@ namespace DimensionData.Controllers
             #endregion PieChart
 
             #region BarChart
-            int overSixty = _context.Employee.Where(a => a.Emp.Age >= 60).Select(a => a).Count();
-            int underTwenties = _context.Employee.Where(a => a.Emp.Age < 20).Select(a => a).Count();
-            int twenties = _context.Employee.Where(a => a.Emp.Age >= 20 && a.Emp.Age < 30).Select(a => a).Count();
-            int thirties = _context.Employee.Where(a => a.Emp.Age >= 30 && a.Emp.Age < 40).Select(a => a).Count();
-            int fourties = _context.Employee.Where(a => a.Emp.Age >= 40 && a.Emp.Age < 50).Select(a => a).Count();
-            int fifties = _context.Employee.Where(a => a.Emp.Age >= 50 && a.Emp.Age < 60).Select(a => a).Count();
-            
 
-            ViewBag.UT = underTwenties;
-            ViewBag.TW = twenties;
-            ViewBag.TH = thirties;
-            ViewBag.FO = fourties;
-            ViewBag.FI = fifties;
-            ViewBag.OS = overSixty;
+            (int, int, int, int, int, int) ageTuple = ( _context.Employee.Where(a => a.Emp.Age < 20).Select(a => a).Count(),
+                                                        _context.Employee.Where(a => a.Emp.Age >= 20 && a.Emp.Age < 30).Select(a => a).Count(),
+                                                        _context.Employee.Where(a => a.Emp.Age >= 30 && a.Emp.Age < 40).Select(a => a).Count(),
+                                                        _context.Employee.Where(a => a.Emp.Age >= 40 && a.Emp.Age < 50).Select(a => a).Count(),
+                                                        _context.Employee.Where(a => a.Emp.Age >= 50 && a.Emp.Age < 60).Select(a => a).Count(),
+                                                        _context.Employee.Where(a => a.Emp.Age >= 60).Select(a => a).Count());
+
+            ViewData["AGE"] = ageTuple;
             #endregion BarChart
+
+            #region LineChart
+            (int, int, int, int, int) yearAtCompTuple = (_context.Employee.Where(h => h.EmpHistory.YearsAtCompany <= 2).Select(h => h).Count(),
+                                                         _context.Employee.Where(h => h.EmpHistory.YearsAtCompany > 2 && h.EmpHistory.YearsAtCompany <= 4).Select(h => h).Count(),
+                                                         _context.Employee.Where(h => h.EmpHistory.YearsAtCompany > 4 && h.EmpHistory.YearsAtCompany <= 6).Select(h => h).Count(),
+                                                         _context.Employee.Where(h => h.EmpHistory.YearsAtCompany > 6 && h.EmpHistory.YearsAtCompany <= 8).Select(h => h).Count(),
+                                                         _context.Employee.Where(h => h.EmpHistory.YearsAtCompany >= 10).Select(h => h).Count());
+            ViewData["COMPYEARS"] = yearAtCompTuple;
+
+            (int, int, int, int, int) yearsCurRole = (_context.Employee.Where(h => h.EmpHistory.YearsInCurrentRole <= 2).Select(h => h).Count(),
+                                                         _context.Employee.Where(h => h.EmpHistory.YearsInCurrentRole > 2 && h.EmpHistory.YearsInCurrentRole <= 4).Select(h => h).Count(),
+                                                         _context.Employee.Where(h => h.EmpHistory.YearsInCurrentRole > 4 && h.EmpHistory.YearsInCurrentRole <= 6).Select(h => h).Count(),
+                                                         _context.Employee.Where(h => h.EmpHistory.YearsInCurrentRole > 6 && h.EmpHistory.YearsInCurrentRole <= 8).Select(h => h).Count(),
+                                                         _context.Employee.Where(h => h.EmpHistory.YearsInCurrentRole >= 10).Select(h => h).Count());
+            ViewData["CURROLE"] = yearsCurRole;
+
+            (int, int, int, int, int) yearSinceProm = (_context.Employee.Where(h => h.EmpHistory.YearsSinceLastPromotion <= 2).Select(h => h).Count(),
+                                                         _context.Employee.Where(h => h.EmpHistory.YearsSinceLastPromotion > 2 && h.EmpHistory.YearsSinceLastPromotion <= 4).Select(h => h).Count(),
+                                                         _context.Employee.Where(h => h.EmpHistory.YearsSinceLastPromotion > 4 && h.EmpHistory.YearsSinceLastPromotion <= 6).Select(h => h).Count(),
+                                                         _context.Employee.Where(h => h.EmpHistory.YearsSinceLastPromotion > 6 && h.EmpHistory.YearsSinceLastPromotion <= 8).Select(h => h).Count(),
+                                                         _context.Employee.Where(h => h.EmpHistory.YearsSinceLastPromotion >= 10).Select(h => h).Count());
+            ViewData["PROM"] = yearSinceProm;
+
+            (int, int, int, int, int) yearsCurMan = (_context.Employee.Where(h => h.EmpHistory.YearsWithCurrManager <= 2).Select(h => h).Count(),
+                                                        _context.Employee.Where(h => h.EmpHistory.YearsWithCurrManager > 2 && h.EmpHistory.YearsWithCurrManager <= 4).Select(h => h).Count(),
+                                                        _context.Employee.Where(h => h.EmpHistory.YearsWithCurrManager > 4 && h.EmpHistory.YearsWithCurrManager <= 6).Select(h => h).Count(),
+                                                        _context.Employee.Where(h => h.EmpHistory.YearsWithCurrManager > 6 && h.EmpHistory.YearsWithCurrManager <= 8).Select(h => h).Count(),
+                                                        _context.Employee.Where(h => h.EmpHistory.YearsWithCurrManager >= 10).Select(h => h).Count());
+            ViewData["CURMAN"] = yearsCurMan;
+            #endregion LineChart
+
+            #region PolarAreaChart
+            (int, int, int) maritalStatTuple = (_context.Employee.Where(m => m.Emp.MaritalStatus == "Single").Select(m => m).Count(),
+                                                _context.Employee.Where(m => m.Emp.MaritalStatus == "Divorced").Select(m => m).Count(),
+                                                _context.Employee.Where(m => m.Emp.MaritalStatus == "Married").Select(m => m).Count());
+
+            ViewData["MARSTAT"] = maritalStatTuple;
+            #endregion PolarAreaChart
 
             return View();
         }

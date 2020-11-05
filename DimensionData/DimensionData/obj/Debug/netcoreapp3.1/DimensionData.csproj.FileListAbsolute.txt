@@ -427,3 +427,5 @@ E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Dime
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.MvcApplicationPartsAssemblyInfo.cache
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\DataAnalytics\GenderPieChart.cshtml.g.cs
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\DataAnalytics\AgeBarChart.cshtml.g.cs
+E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\DataAnalytics\HistoryLineChart.cshtml.g.cs
+E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\DataAnalytics\MaritalPolarAreaChart.cshtml.g.cs

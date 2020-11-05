@@ -1,8 +1,18 @@
 ﻿
 @*<h3 class="text-center" >Pie Chart</h3>*@
 
-<div style="width: 50%">
+@*<div style="width: 50%">
     <canvas id="chart-area"></canvas>
+</div>*@
+
+<div class="column">
+    <div class="col-xs-1 center-block" >
+        <center>
+            <div style="width: 60%">
+                <canvas id="chart-area"></canvas>
+            </div>
+        </center>
+    </div>
 </div>
 
 <script>
@@ -20,6 +30,7 @@
                 backgroundColor: [
                     "pink", "#268ff7"
                 ],
+                label: 'Total Employees' // for legend
             }],
             labels: [
                 'Female',
@@ -32,6 +43,20 @@
                 display: true,
                 text: 'Employee Gender Ratio',
                 fontSize: 25
+            },
+            legend: {
+                position: 'right',
+                labels: {
+                    fontSize: 20
+                }
+            },
+            layout: {
+                padding: {
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 25
+                }
             }
         }
     });
