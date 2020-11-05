@@ -6,6 +6,10 @@
     <title>@ViewData["Title"] - DimensionData</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/js/Chart.js"></script>
+    <script src="~/js/Chart.min.js"></script>
+    <script src="~/js/utils.js"></script>
+    @*<link href="~/css/Chart.css" rel="stylesheet" />*@
 </head>
 <body>
     <header>
@@ -30,6 +34,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="RoleIndex">View Roles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="DataAnalytics" asp-action="DimensionCharts">Data Analytics</a>
                         </li>
                     </ul>
                 </div>

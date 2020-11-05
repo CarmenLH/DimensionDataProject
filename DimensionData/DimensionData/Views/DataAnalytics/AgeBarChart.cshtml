@@ -1,0 +1,51 @@
+﻿
+@*<h3 class="text-center" >Bar Chart</h3>*@
+
+<div  style="width: 70%">
+    <canvas id="AgeBarCanvas"></canvas>
+</div>
+
+
+<script>
+
+    var ctx = document.getElementById('AgeBarCanvas').getContext('2d');
+
+    var myChart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+                
+            datasets: [{
+                data: [
+                    @ViewBag.UT,
+                    @ViewBag.TW,
+                    @ViewBag.TH,
+                    @ViewBag.FO,
+                    @ViewBag.FI,
+                    @ViewBag.OS
+                ],
+                label: 'Total Employees', 
+                backgroundColor: "rgba(38, 247, 146, 0.8)",
+                borderColor: "rgba(5, 148, 79, 1)",
+                borderWidth: 1
+            }],
+            labels: ['Under Twenty', 'Twenties', 'Thirties', 'Fourties', 'Fifties', 'Over Sixty']
+        },
+        options: {
+            elements: {
+                rectangle: {
+                    borderWidth: 2,
+                }
+            },
+            responsive: true,
+            legend: {
+                position: 'right',
+            },
+            title: {
+                display: true,
+                text: 'Employee Age Range',
+                fontSize: 25
+            }
+        }
+    });
+
+</script>

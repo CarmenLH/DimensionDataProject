@@ -52,10 +52,15 @@ namespace DimensionData.Data
 
             var employees = from s in Employee.Include(e => e.Edu).Include(e => e.Emp).Include(e => e.Job) select s;
 
+            //Filter data based on search param
             if (!String.IsNullOrEmpty(searchString))
             {
                 employees = employees.Where(s => s.Job.Department.Contains(searchString)
-                                       || s.Job.JobRole.Contains(searchString));
+                                       || s.Job.JobRole.Contains(searchString)
+                                       || s.Emp.Gender.Contains(searchString)
+                                       || s.Job.JobLevel.ToString() == (searchString)
+                                       || s.Emp.Age.ToString() == (searchString)
+                                       || s.EmployeeNumber.ToString() == (searchString));
             }
 
             //Individual Sorting for each column

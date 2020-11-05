@@ -5,23 +5,23 @@
     ViewData["Title"] = "Employee Details";
 }
 
-<h1>Employee Details</h1>
+<h1 class="text-center" style="padding: 10px 0px 50px 0px">Employee Details</h1>
 
 <p>
-    <a asp-action="Create">Create New Employee</a>
+    <a class="btn btn-outline-primary" style="padding: 2px 10px" asp-action="Create">Create New Employee</a>
 </p>
 
 <form asp-action="Index" method="get">
     <div class="form-actions no-color">
         <p>
-            Find by department or job role: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
-            <input type="submit" value="Search" class="btn btn-default" /> |
-            <a asp-action="Index">Back To Start of Full List</a>
+            Search for data: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-dark" style="padding: 2px 10px" /> |
+            <a class="btn btn-dark" style="padding: 2px 10px" asp-action="Index">Back To Start of Full List</a>
         </p>
     </div>
 </form>
 
-<table class="table">
+<table class="table table-hover">
     <thead>
         <tr>
             <th>
@@ -68,9 +68,9 @@
                     @Html.DisplayFor(modelItem => item.Job.JobLevel)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.EmployeeNumber">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.EmployeeNumber">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.EmployeeNumber">Delete</a>
+                    <a class="btn btn-outline-primary" style="padding: 2px 10px" asp-action="Edit" asp-route-id="@item.EmployeeNumber">Edit</a> |
+                    <a class="btn btn-outline-primary" style="padding: 2px 10px" asp-action="Details" asp-route-id="@item.EmployeeNumber">Details</a> |
+                    <a class="btn btn-outline-danger" style="padding: 2px 10px" asp-action="Delete" asp-route-id="@item.EmployeeNumber">Delete</a>
                 </td>
             </tr>
         }
@@ -85,13 +85,13 @@
    asp-route-sortOrder="@ViewData["CurrentSort"]"
    asp-route-pageNumber="@(Model.PageIndex - 1)"
    asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   class="btn btn-default @prevDisabled">
+   class="btn btn-outline-dark @prevDisabled">
     Previous
 </a>
 <a asp-action="Index"
    asp-route-sortOrder="@ViewData["CurrentSort"]"
    asp-route-pageNumber="@(Model.PageIndex + 1)"
    asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   class="btn btn-default @nextDisabled">
+   class="btn btn-outline-dark @nextDisabled">
     Next
 </a>

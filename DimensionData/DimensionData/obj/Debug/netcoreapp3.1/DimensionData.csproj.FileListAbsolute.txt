@@ -421,6 +421,9 @@ E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razo
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\Role\RoleIndex.cshtml.g.cs
 E:\DimensionDataProject\DimensionData\DimensionData\bin\Debug\netcoreapp3.1\SendGrid.dll
 E:\DimensionDataProject\DimensionData\DimensionData\bin\Debug\netcoreapp3.1\StarkbankEcdsa.dll
+E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\DataAnalytics\DimensionCharts.cshtml.g.cs
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.csproj.CoreCompileInputs.cache
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.MvcApplicationPartsAssemblyInfo.cs
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\DimensionData.MvcApplicationPartsAssemblyInfo.cache
+E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\DataAnalytics\GenderPieChart.cshtml.g.cs
+E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\DataAnalytics\AgeBarChart.cshtml.g.cs

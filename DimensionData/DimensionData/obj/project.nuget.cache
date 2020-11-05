@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "zeULkWZtpoh2TevsPZ/1uLZr1gm2eFfhp2c7kIT6nI18fBXv0WUxFAflVGFwOoLPP7RyweVy4fRjY/oReBtsEw==",
+  "dgSpecHash": "AU8mUwrm+fAUEQSsisXdEDY2AT0N2Mpiwc/JeRBpEEYl0uHSKMR4VjefQVtAUnY/Bo/MwGhBo0prNjUrdk2QIw==",
   "success": true,
   "projectFilePath": "E:\\DimensionDataProject\\DimensionData\\DimensionData\\DimensionData.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Carmen\\.nuget\\packages\\chart.js\\2.9.3\\chart.js.2.9.3.nupkg.sha512",
     "C:\\Users\\Carmen\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.9\\microsoft.aspnetcore.cryptography.internal.3.1.9.nupkg.sha512",
     "C:\\Users\\Carmen\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.9\\microsoft.aspnetcore.cryptography.keyderivation.3.1.9.nupkg.sha512",
     "C:\\Users\\Carmen\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\3.1.9\\microsoft.aspnetcore.diagnostics.entityframeworkcore.3.1.9.nupkg.sha512",

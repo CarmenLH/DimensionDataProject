@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "DimensionCharts";
+}
+
+<h1 class="text-center" style="padding: 10px 0px 50px 0px">Data Analytics</h1>
+
+@await Html.PartialAsync("GenderPieChart")
+
+@await Html.PartialAsync("AgeBarChart")
+
+@*<table class="table" style="width: 100%">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="width: 50%">@await Html.PartialAsync("GenderPieChart")</td>
+                <td  style="width: 50%">@await Html.PartialAsync("AgeBarChart")</td>
+            </tr>
+
+        </tbody>
+    </table>*@

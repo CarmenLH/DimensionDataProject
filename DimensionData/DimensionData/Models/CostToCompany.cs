@@ -13,17 +13,17 @@ namespace DimensionData.Models
 
         public int PayId { get; set; }
         [DataType(DataType.Currency)]
-        public decimal? HourlyRate { get; set; }
+        public double? HourlyRate { get; set; }
         [DataType(DataType.Currency)]
-        public decimal? MonthlyRate { get; set; }
+        public double? MonthlyRate { get; set; }
         [DataType(DataType.Currency)]
-        public decimal? MonthlyIncome { get; set; }
+        public double? MonthlyIncome { get; set; }
         [DataType(DataType.Currency)]
-        public decimal? DailyRate { get; set; }
+        public double? DailyRate { get; set; }
         [DataType(DataType.Currency)]
         public bool OverTime { get; set; }
         [DataType(DataType.Currency)]
-        public decimal? PercentSalaryHike { get; set; }
+        public double? PercentSalaryHike { get; set; }
 
         public virtual ICollection<Employee> Employee { get; set; }
     }
