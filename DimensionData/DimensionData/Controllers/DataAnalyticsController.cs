@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DimensionData.Controllers
 {
-    //[Authorize(Policy = "writepolicy")]
+    [Authorize(Policy = "readonlypolicy")]
     public class DataAnalyticsController : Controller
     {
         private readonly DimensionDataContext _context;
