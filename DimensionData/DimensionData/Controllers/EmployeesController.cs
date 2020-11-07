@@ -244,16 +244,19 @@ namespace DimensionData.Controllers
             var getEmpID = await _context.Employee.Where(f => f.EmployeeNumber == id).Select(f => f.EmpId).ToListAsync();
             var getPayID = await _context.Employee.Where(f => f.EmployeeNumber == id).Select(f => f.PayId).ToListAsync();
             var getHistoryID = await _context.Employee.Where(f => f.EmployeeNumber == id).Select(f => f.EmpHistoryId).ToListAsync();
+            var getUserEmail = await _context.Employee.Where(f => f.EmployeeNumber == id).Select(f => f.Emp.Email).FirstAsync();
 
             //var employee = await _context.Employee.FindAsync(id);
             var employeedetails = await _context.EmployeeDetails.FindAsync(getEmpID.ElementAt(0));
             var costtocompany = await _context.CostToCompany.FindAsync(getPayID.ElementAt(0));
             var employeehistory = await _context.EmployeeHistory.FindAsync(getHistoryID.ElementAt(0));
+            var empRoleEmail = await _context.AspNetUsers.Where(a => a.UserName == getUserEmail).FirstAsync();
 
             //_context.Employee.Remove(employee);
             _context.EmployeeDetails.Remove(employeedetails);
             _context.CostToCompany.Remove(costtocompany);
             _context.EmployeeHistory.Remove(employeehistory);
+            _context.AspNetUsers.Remove(empRoleEmail);
 
             await _context.SaveChangesAsync();
 

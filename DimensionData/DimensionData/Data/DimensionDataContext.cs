@@ -18,7 +18,7 @@ namespace DimensionData.Data
         {
         }
 
-        #region Table Db Sets
+        #region Database tables
         public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
@@ -34,7 +34,7 @@ namespace DimensionData.Data
         public virtual DbSet<EmployeePerformance> EmployeePerformance { get; set; }
         public virtual DbSet<JobInformation> JobInformation { get; set; }
         public virtual DbSet<Surveys> Surveys { get; set; }
-        #endregion Table Db Sets
+        #endregion Database tables
 
         #region SQL queries for Data
 
@@ -197,7 +197,7 @@ namespace DimensionData.Data
         {
             try
             {
-                var getEmpID =  await Employee.Where(f => f.EmployeeNumber == id).Select(f => f.EmpId).ToListAsync();
+                var getEmpID = await Employee.Where(f => f.EmployeeNumber == id).Select(f => f.EmpId).ToListAsync();
                 var getPayID = await Employee.Where(f => f.EmployeeNumber == id).Select(f => f.PayId).ToListAsync();
                 var getHistoryID = await Employee.Where(f => f.EmployeeNumber == id).Select(f => f.EmpHistoryId).ToListAsync();
 
@@ -215,7 +215,7 @@ namespace DimensionData.Data
 
                 return employee;
             }
-            catch(DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException)
             {
                 return NotFound();
             }
@@ -233,14 +233,14 @@ namespace DimensionData.Data
 
         #endregion SQL queries for Data
 
-        #region Model Builder 
+        #region ModelBuilder
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AspNetRoleClaims>(entity =>
             {
-                entity.HasIndex(e => e.RoleId);
-
-                entity.Property(e => e.RoleId).IsRequired();
+                entity.Property(e => e.RoleId)
+                    .IsRequired()
+                    .HasMaxLength(450);
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.AspNetRoleClaims)
@@ -261,9 +261,9 @@ namespace DimensionData.Data
 
             modelBuilder.Entity<AspNetUserClaims>(entity =>
             {
-                entity.HasIndex(e => e.UserId);
-
-                entity.Property(e => e.UserId).IsRequired();
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.AspNetUserClaims)
@@ -327,11 +327,19 @@ namespace DimensionData.Data
 
                 entity.Property(e => e.Email).HasMaxLength(256);
 
+                entity.Property(e => e.EmpId).HasColumnName("EmpID");
+
                 entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
 
                 entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
 
                 entity.Property(e => e.UserName).HasMaxLength(256);
+
+                entity.HasOne(d => d.Emp)
+                    .WithMany(p => p.AspNetUsers)
+                    .HasForeignKey(d => d.EmpId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_AspNetUsers_EmployeeDetails");
             });
 
             modelBuilder.Entity<CostToCompany>(entity =>
@@ -409,11 +417,16 @@ namespace DimensionData.Data
 
                 entity.Property(e => e.EmpId).HasColumnName("EmpID");
 
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(256);
+
                 entity.Property(e => e.Gender)
                     .HasMaxLength(15)
                     .IsUnicode(false);
 
                 entity.Property(e => e.MaritalStatus)
+                    .IsRequired()
                     .HasMaxLength(15)
                     .IsUnicode(false);
             });
@@ -473,6 +486,6 @@ namespace DimensionData.Data
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-        #endregion Model Builder 
+        #endregion ModelBuilder
     }
 }

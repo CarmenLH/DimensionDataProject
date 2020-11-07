@@ -7,6 +7,7 @@ namespace DimensionData.Models
     {
         public EmployeeDetails()
         {
+            AspNetUsers = new HashSet<AspNetUsers>();
             Employee = new HashSet<Employee>();
         }
 
@@ -18,6 +19,8 @@ namespace DimensionData.Models
         public string Gender { get; set; }
         public string MaritalStatus { get; set; }
         public string Email { get; set; }
+
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
         public virtual ICollection<Employee> Employee { get; set; }
     }
 }
