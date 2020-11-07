@@ -147,9 +147,11 @@ namespace DimensionData.Data
                 return NotFound();
             }
 
+            Attach(employee).State = EntityState.Modified;
+
             try
             {
-                Update(employee);
+                //Update(employee);
                 await SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -195,8 +197,20 @@ namespace DimensionData.Data
         {
             try
             {
+                var getEmpID =  await Employee.Where(f => f.EmployeeNumber == id).Select(f => f.EmpId).ToListAsync();
+                var getPayID = await Employee.Where(f => f.EmployeeNumber == id).Select(f => f.PayId).ToListAsync();
+                var getHistoryID = await Employee.Where(f => f.EmployeeNumber == id).Select(f => f.EmpHistoryId).ToListAsync();
+
                 var employee = await Employee.FindAsync(id);
+                var employeedetails = await EmployeeDetails.FindAsync(getEmpID.ElementAt(0));
+                var costtocompany = await CostToCompany.FindAsync(getPayID.ElementAt(0));
+                var employeehistory = await EmployeeHistory.FindAsync(getHistoryID.ElementAt(0));
+
                 Employee.Remove(employee);
+                EmployeeDetails.Remove(employeedetails);
+                CostToCompany.Remove(costtocompany);
+                EmployeeHistory.Remove(employeehistory);
+
                 await SaveChangesAsync();
 
                 return employee;

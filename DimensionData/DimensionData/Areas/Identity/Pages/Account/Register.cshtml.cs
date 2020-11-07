@@ -88,25 +88,24 @@ namespace DimensionData.Areas.Identity.Pages.Account
         {
             returnUrl = returnUrl ?? Url.Content("~/");
 
-            // search role
-            //var role = _roleManager.FindByIdAsync(Input.Name).Result;
-
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            //Chech user role to assign roles for access
+            var role = _context.Employee.Where(e => e.Emp.Email == Input.Email).Select(a => a.Job.JobRole).ToList();
+
+            if (role.Contains("Manager"))
+            {
+                Input.Name = "Manager";
+            }
+            else
+            {
+                Input.Name = "Employee";
+            }
+    
 
             if ((_context.EmployeeDetails.Count(a => a.Email == Input.Email) >= 1) || Input.Email == "carmenlehanie@gmail.com")  //See if email exists in database before assigning role
             {
-                //Chech user role to assign roles for access
-                var role = _context.Employee.Where(e => e.Emp.Email == Input.Email).Select(a => a.Job.JobRole).ToList();
-
-                if (role.Equals("Manager"))
-                {
-                    Input.Name = "Manager";
-                }
-                else
-                {
-                    Input.Name = "Employee";
-                }
-
+                
                 if (ModelState.IsValid)
                 {
                     var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
@@ -119,9 +118,6 @@ namespace DimensionData.Areas.Identity.Pages.Account
                         // code for adding user to role
                         await _userManager.AddToRoleAsync(user, Input.Name);
                         // ends here
-
-                        //await _signInManager.SignInAsync(user, isPersistent: false);
-                        //return LocalRedirect(returnUrl);
 
                         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                         code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -152,6 +148,10 @@ namespace DimensionData.Areas.Identity.Pages.Account
 
                 }
 
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "This email does not exist in the system. Please register with your work email.");
             }
 
             // If we got this far, something failed, redisplay form

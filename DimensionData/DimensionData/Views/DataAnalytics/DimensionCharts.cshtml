@@ -5,26 +5,66 @@
 
 <h1 class="text-center" style="padding: 10px 0px 50px 0px">Data Analytics</h1>
 
-@await Html.PartialAsync("GenderPieChart")
+@*@await Html.PartialAsync("GenderPieChart")
 
 @await Html.PartialAsync("AgeBarChart")
 
 @await Html.PartialAsync("HistoryLineChart")
 
-@await Html.PartialAsync("MaritalPolarAreaChart")
+@await Html.PartialAsync("MaritalPolarAreaChart")*@
 
-@*<table class="table" style="width: 100%">
+<table class="table">
         <thead>
             <tr>
-                <th></th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td style="width: 50%">@await Html.PartialAsync("GenderPieChart")</td>
-                <td  style="width: 50%">@await Html.PartialAsync("AgeBarChart")</td>
             </tr>
 
         </tbody>
-    </table>*@
+</table>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="width: 50%">@await Html.PartialAsync("AgeBarChart")</td>
+        </tr>
+
+    </tbody>
+</table>
+
+<table class="table" >
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="width: 50%">@await Html.PartialAsync("HistoryLineChart")</td>
+        </tr>
+
+    </tbody>
+</table>
+
+<table class="table" >
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="width: 50%">@await Html.PartialAsync("MaritalPolarAreaChart")</td>
+        </tr>
+
+    </tbody>
+</table>

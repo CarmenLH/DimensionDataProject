@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using DimensionData.Areas;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using System.Security.Cryptography.X509Certificates;
 
 namespace DimensionData.Controllers
 {
@@ -240,7 +241,24 @@ namespace DimensionData.Controllers
         [Authorize(Policy = "writepolicy")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            return RedirectToAction("Index", await _context.DeleteAsync(id));
+            var getEmpID = await _context.Employee.Where(f => f.EmployeeNumber == id).Select(f => f.EmpId).ToListAsync();
+            var getPayID = await _context.Employee.Where(f => f.EmployeeNumber == id).Select(f => f.PayId).ToListAsync();
+            var getHistoryID = await _context.Employee.Where(f => f.EmployeeNumber == id).Select(f => f.EmpHistoryId).ToListAsync();
+
+            //var employee = await _context.Employee.FindAsync(id);
+            var employeedetails = await _context.EmployeeDetails.FindAsync(getEmpID.ElementAt(0));
+            var costtocompany = await _context.CostToCompany.FindAsync(getPayID.ElementAt(0));
+            var employeehistory = await _context.EmployeeHistory.FindAsync(getHistoryID.ElementAt(0));
+
+            //_context.Employee.Remove(employee);
+            _context.EmployeeDetails.Remove(employeedetails);
+            _context.CostToCompany.Remove(costtocompany);
+            _context.EmployeeHistory.Remove(employeehistory);
+
+            await _context.SaveChangesAsync();
+
+            //return RedirectToAction("Index", await _context.DeleteAsync(id));
+            return RedirectToAction("Index");
         }
 
         private bool EmployeeExists(int id)
