@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DimensionData.Controllers
 {
     [Authorize(Policy = "usermanagepolicy")]
     public class RoleController : Controller
     {
-        RoleManager<IdentityRole> roleManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         /// 
         /// Injecting Role Manager
@@ -19,12 +20,12 @@ namespace DimensionData.Controllers
         /// 
         public RoleController(RoleManager<IdentityRole> roleManager)
         {
-            this.roleManager = roleManager;
+            _roleManager = roleManager;
         }
 
-        public IActionResult RoleIndex()
+        public async Task<IActionResult> RoleIndex()
         {
-            var roles = roleManager.Roles.ToList();
+            var roles = await _roleManager.Roles.ToListAsync();
             return View(roles);
         }
 
@@ -34,9 +35,12 @@ namespace DimensionData.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateRoles(IdentityRole role)
+        public async Task<IActionResult> CreateRoles(string roleName)
         {
-            await roleManager.CreateAsync(role);
+            if (roleName != null)
+            {
+                await _roleManager.CreateAsync(new IdentityRole(roleName.Trim()));
+            }
             return RedirectToAction("RoleIndex");
         }
     }
