@@ -18,12 +18,10 @@ namespace DimensionData.Controllers
     public class EmployeesController : Controller
     {
         private readonly DimensionDataContext _context;
-        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<IdentityUser> _userManager;
-        public EmployeesController(DimensionDataContext context, RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
+        public EmployeesController(DimensionDataContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
-            _roleManager = roleManager;
             _userManager = userManager;
         }
 
@@ -31,13 +29,7 @@ namespace DimensionData.Controllers
         [Authorize(Policy = "readonlypolicy")]
         public async Task<IActionResult> Index(string sortOrder, string currentFilter, string searchString, int? pageNumber)
         {
-
-            var usersOfManager = await _userManager.GetUsersInRoleAsync("Manager");
-            var usersOfEmployee = await _userManager.GetUsersInRoleAsync("Employee");
-            var usersOfAdmin = await _userManager.GetUsersInRoleAsync("Admin");
-
-
-            //Define sorting for each column
+            #region Column Filters
             ViewData["CurrentSort"] = sortOrder;
             ViewData["EmpNrSortParam"] = sortOrder == "empnr_desc" ? "EmpNr" : "empnr_desc";
             ViewData["EmpAgeSortParam"] = sortOrder == "empage_desc" ? "EmpAge" : "empage_desc";
@@ -47,6 +39,7 @@ namespace DimensionData.Controllers
             ViewData["GenderSortParam"] = sortOrder == "gender_desc" ? "Gender" : "gender_desc";
 
             ViewData["CurrentFilter"] = searchString;
+            #endregion Column Filters
 
             if (searchString != null)
             {
@@ -57,9 +50,10 @@ namespace DimensionData.Controllers
                 searchString = currentFilter;
             }
 
-            // Resolve the user via their email
+            // Find the user via their email
             var user = await _userManager.FindByEmailAsync(User.Identity.Name);
-            // Get the roles for the user
+
+            // Get the role for the user
             var roles = await _userManager.GetRolesAsync(user);
 
             if (roles.Contains("Manager") || roles.Contains("Admin"))
@@ -241,35 +235,12 @@ namespace DimensionData.Controllers
         [Authorize(Policy = "writepolicy")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var getEmpID = await _context.Employee.Where(f => f.EmployeeNumber == id).Select(f => f.EmpId).ToListAsync();
-            var getPayID = await _context.Employee.Where(f => f.EmployeeNumber == id).Select(f => f.PayId).ToListAsync();
-            var getHistoryID = await _context.Employee.Where(f => f.EmployeeNumber == id).Select(f => f.EmpHistoryId).ToListAsync();
-            var getUserEmail = await _context.Employee.Where(f => f.EmployeeNumber == id).Select(f => f.Emp.Email).FirstAsync();
-
-            //var employee = await _context.Employee.FindAsync(id);
-            var employeedetails = await _context.EmployeeDetails.FindAsync(getEmpID.ElementAt(0));
-            var costtocompany = await _context.CostToCompany.FindAsync(getPayID.ElementAt(0));
-            var employeehistory = await _context.EmployeeHistory.FindAsync(getHistoryID.ElementAt(0));
-            var empRoleEmail = await _context.AspNetUsers.Where(a => a.UserName == getUserEmail).FirstAsync();
-
-            //_context.Employee.Remove(employee);
-            _context.EmployeeDetails.Remove(employeedetails);
-            _context.CostToCompany.Remove(costtocompany);
-            _context.EmployeeHistory.Remove(employeehistory);
-            _context.AspNetUsers.Remove(empRoleEmail);
-
-            await _context.SaveChangesAsync();
-
-            //return RedirectToAction("Index", await _context.DeleteAsync(id));
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", await _context.DeleteAsync(id));
         }
 
         private bool EmployeeExists(int id)
         {
             return _context.Employee.Any(e => e.EmployeeNumber == id);
         }
-
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     }
 }

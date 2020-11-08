@@ -110,11 +110,11 @@ namespace DimensionData.Areas.Identity.Pages.Account
                 if (ModelState.IsValid)
                 {
 
-                    var getUser = _context.AspNetUsers.Where(e => e.Email == Input.Email).FirstAsync();
                     
-
+                    
                     var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
                     
+
                     var result = await _userManager.CreateAsync(user, Input.Password);
 
                     if (result.Succeeded)
