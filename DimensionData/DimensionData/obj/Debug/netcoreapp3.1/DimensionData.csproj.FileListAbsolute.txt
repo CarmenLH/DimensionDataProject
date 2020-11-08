@@ -429,3 +429,6 @@ E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razo
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\DataAnalytics\AgeBarChart.cshtml.g.cs
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\DataAnalytics\HistoryLineChart.cshtml.g.cs
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Debug\netcoreapp3.1\Razor\Views\DataAnalytics\MaritalPolarAreaChart.cshtml.g.cs
+E:\DimensionDataProject\DimensionData\DimensionData\bin\Debug\netcoreapp3.1\Properties\serviceDependencies.DimensionDataProj - Web Deploy.json
+E:\DimensionDataProject\DimensionData\DimensionData\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\DimensionDataProj - Web Deploy\mssql1.arm.json
+E:\DimensionDataProject\DimensionData\DimensionData\bin\Debug\netcoreapp3.1\Properties\ServiceDependencies\DimensionDataProj - Web Deploy\profile.arm.json

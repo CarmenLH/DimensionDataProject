@@ -102,8 +102,6 @@ namespace DimensionData.Areas.Identity.Pages.Account
                 Input.Name = "Employee";
             }
 
-            int id = _context.Employee.Where(e => e.Emp.Email == Input.Email).Select(e => e.Emp.EmpId).ToList().First();
-
             if ((_context.EmployeeDetails.Count(a => a.Email == Input.Email) >= 1))  //See if email exists in database before assigning role
             {
                 
