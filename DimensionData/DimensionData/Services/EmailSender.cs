@@ -28,7 +28,7 @@ namespace DimensionData.Services
             var client = new SendGridClient("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");
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("carmenakashaggy@gmail.com", Options.SendGridUser),
+                From = new EmailAddress("mycvwebsiteemail@gmail.com", Options.SendGridUser),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message

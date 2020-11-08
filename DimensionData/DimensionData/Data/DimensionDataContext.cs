@@ -71,11 +71,10 @@ namespace DimensionData.Data
                 return NotFound();
             }
 
-            Attach(employee).State = EntityState.Modified;
-
             try
             {
-                //Update(employee);
+                Remove(employee);
+                Update(employee);
                 await SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)

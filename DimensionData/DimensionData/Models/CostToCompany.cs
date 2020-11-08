@@ -11,12 +11,12 @@ namespace DimensionData.Models
         }
 
         public int PayId { get; set; }
-        public decimal? HourlyRate { get; set; }
-        public decimal? MonthlyRate { get; set; }
-        public decimal? MonthlyIncome { get; set; }
-        public decimal? DailyRate { get; set; }
+        public double? HourlyRate { get; set; }
+        public double? MonthlyRate { get; set; }
+        public double? MonthlyIncome { get; set; }
+        public double? DailyRate { get; set; }
         public bool OverTime { get; set; }
-        public decimal? PercentSalaryHike { get; set; }
+        public double? PercentSalaryHike { get; set; }
 
         public virtual ICollection<Employee> Employee { get; set; }
     }
