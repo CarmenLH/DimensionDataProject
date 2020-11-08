@@ -9,7 +9,7 @@ using SendGrid.Helpers.Mail;
 
 namespace DimensionData.Services
 {
-    public class EmailSender: IEmailSender
+    public class EmailSender : IEmailSender
     {
         public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor)
         {
@@ -25,18 +25,16 @@ namespace DimensionData.Services
 
         public Task Execute(string apiKey, string subject, string message, string email)
         {
-            var client = new SendGridClient(apiKey);
+            var client = new SendGridClient("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");
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("mycvwebsiteemail@gmail.com", Options.SendGridUser),
+                From = new EmailAddress("carmenakashaggy@gmail.com", Options.SendGridUser),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message
             };
             msg.AddTo(new EmailAddress(email));
 
-            // Disable click tracking.
-            // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
             msg.SetClickTracking(false, false);
 
             return client.SendEmailAsync(msg);
