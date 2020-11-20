@@ -126,7 +126,7 @@ namespace DimensionData.Controllers
                 int pageSize = 10;
                 var pagedList = await PaginatedList<Employee>.CreateAsync(employees.AsNoTracking(), pageNumber ?? 1, pageSize);
                 return View(pagedList);
-            }
+            }   
             
         }
 
