@@ -46,6 +46,10 @@
               "target": "Package",
               "version": "[2.9.3, )"
             },
+            "MailKit": {
+              "target": "Package",
+              "version": "[2.9.0, )"
+            },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
               "version": "[3.1.9, )"
