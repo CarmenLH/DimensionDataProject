@@ -102,7 +102,7 @@ namespace DimensionData.Areas.Identity.Pages.Account
                 Input.Name = "Employee";
             }
 
-            if (_context.EmployeeDetails.Count(a => a.Email == Input.Email) >= 1)  //See if email exists in database before assigning role
+            if ((_context.EmployeeDetails.Count(a => a.Email == Input.Email) >= 1))  //See if email exists in database before assigning role
             {
                 
                 if (ModelState.IsValid)
