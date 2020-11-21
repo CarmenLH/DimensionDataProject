@@ -9,11 +9,16 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 using MimeKit;
 //using SendGrid;
 //using SendGrid.Helpers.Mail;
 >>>>>>> parent of ee5ec31... Revert "SMTP email service instead of SendGrid"
+=======
+using SendGrid;
+using SendGrid.Helpers.Mail;
+>>>>>>> parent of 3b32726... test
 
 namespace DimensionData.Services
 {
@@ -37,15 +42,18 @@ namespace DimensionData.Services
         {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             SmtpClient client = new SmtpClient(_emailSettings.MailServer, _emailSettings.MailPort)
+=======
+            var client = new SmtpClient(_emailSettings.MailServer, _emailSettings.MailPort)
+>>>>>>> parent of 3b32726... test
             {
                 Port = _emailSettings.MailPort,
                 UseDefaultCredentials = false,
                 EnableSsl = true,
                 Credentials = new NetworkCredential(_emailSettings.Sender, _emailSettings.Password)
             };
-
-            MailMessage mailMessage = new MailMessage
+            var mailMessage = new MailMessage
             {
 =======
             var client = new SmtpClient(_emailSettings.MailServer, _emailSettings.MailPort)
@@ -68,6 +76,5 @@ namespace DimensionData.Services
 
             return client.SendMailAsync(mailMessage);
         }
-
     }
 }
