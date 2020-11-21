@@ -14,7 +14,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using DimensionData.Services;
-using DimensionData.Models;
 
 namespace DimensionData
 {
@@ -57,8 +56,7 @@ namespace DimensionData
             });
 
             //Emailing Service
-            services.AddSingleton<IEmailSender, EmailSender>();
-            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
         }
 

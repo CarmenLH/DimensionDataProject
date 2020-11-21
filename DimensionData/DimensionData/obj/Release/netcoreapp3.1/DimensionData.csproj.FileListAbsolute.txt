@@ -164,6 +164,9 @@ E:\DimensionDataProject\DimensionData\DimensionData\bin\Release\netcoreapp3.1\ru
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Release\netcoreapp3.1\DimensionData.csprojAssemblyReference.cache
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Release\netcoreapp3.1\DimensionData.AssemblyInfoInputs.cache
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Release\netcoreapp3.1\DimensionData.AssemblyInfo.cs
+E:\DimensionDataProject\DimensionData\DimensionData\obj\Release\netcoreapp3.1\DimensionData.csproj.CoreCompileInputs.cache
+E:\DimensionDataProject\DimensionData\DimensionData\obj\Release\netcoreapp3.1\DimensionData.MvcApplicationPartsAssemblyInfo.cs
+E:\DimensionDataProject\DimensionData\DimensionData\obj\Release\netcoreapp3.1\DimensionData.MvcApplicationPartsAssemblyInfo.cache
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Release\netcoreapp3.1\DimensionData.RazorAssemblyInfo.cache
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Release\netcoreapp3.1\DimensionData.RazorAssemblyInfo.cs
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Release\netcoreapp3.1\DimensionData.TagHelpers.input.cache
@@ -237,9 +240,3 @@ E:\DimensionDataProject\DimensionData\DimensionData\obj\Release\netcoreapp3.1\st
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Release\netcoreapp3.1\DimensionData.dll
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Release\netcoreapp3.1\DimensionData.pdb
 E:\DimensionDataProject\DimensionData\DimensionData\obj\Release\netcoreapp3.1\DimensionData.genruntimeconfig.cache
-E:\DimensionDataProject\DimensionData\DimensionData\obj\Release\netcoreapp3.1\DimensionData.csproj.CoreCompileInputs.cache
-E:\DimensionDataProject\DimensionData\DimensionData\obj\Release\netcoreapp3.1\DimensionData.MvcApplicationPartsAssemblyInfo.cs
-E:\DimensionDataProject\DimensionData\DimensionData\obj\Release\netcoreapp3.1\DimensionData.MvcApplicationPartsAssemblyInfo.cache
-E:\DimensionDataProject\DimensionData\DimensionData\bin\Release\netcoreapp3.1\MailKit.dll
-E:\DimensionDataProject\DimensionData\DimensionData\bin\Release\netcoreapp3.1\MimeKit.dll
-E:\DimensionDataProject\DimensionData\DimensionData\bin\Release\netcoreapp3.1\BouncyCastle.Crypto.dll

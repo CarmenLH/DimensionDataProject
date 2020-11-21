@@ -1,53 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Mail;
 using System.Threading.Tasks;
-using DimensionData.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using MimeKit;
-//using SendGrid;
-//using SendGrid.Helpers.Mail;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 
 namespace DimensionData.Services
 {
     public class EmailSender : IEmailSender
     {
-
-        private readonly EmailSettings _emailSettings;
-
-        public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor, IOptions<EmailSettings> emailSettings)
+        public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor)
         {
             Options = optionsAccessor.Value;
-            _emailSettings = emailSettings.Value;
         }
 
         public AuthMessageSenderOptions Options { get; } //set only via Secret Manager
 
         public Task SendEmailAsync(string email, string subject, string message)
         {
+            return Execute(Options.SendGridKey, subject, message, email);
+        }
 
-            var client = new SmtpClient(_emailSettings.MailServer, _emailSettings.MailPort)
+        public Task Execute(string apiKey, string subject, string message, string email)
+        {
+            var client = new SendGridClient("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");
+            var msg = new SendGridMessage()
             {
-                Port = _emailSettings.MailPort,
-                UseDefaultCredentials = false,
-                EnableSsl = true,
-                Credentials = new NetworkCredential(_emailSettings.Sender, _emailSettings.Password)
-            };
-            var mailMessage = new MailMessage
-            {
-                From = new MailAddress(_emailSettings.Sender),
+                From = new EmailAddress("mycvwebsiteemail@gmail.com", Options.SendGridUser),
                 Subject = subject,
-                Body = message,
-                IsBodyHtml = true
+                PlainTextContent = message,
+                HtmlContent = message
             };
+            msg.AddTo(new EmailAddress(email));
 
-            mailMessage.To.Add(email);
+            msg.SetClickTracking(false, false);
 
-            return client.SendMailAsync(mailMessage);
+            return client.SendEmailAsync(msg);
         }
     }
 }
