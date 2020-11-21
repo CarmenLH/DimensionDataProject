@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 using DimensionData.Models;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Options;
-using SendGrid;
-using SendGrid.Helpers.Mail;
 
 namespace DimensionData.Services
 {
@@ -27,14 +25,15 @@ namespace DimensionData.Services
         public Task SendEmailAsync(string email, string subject, string message)
         {
 
-            var client = new SmtpClient(_emailSettings.MailServer, _emailSettings.MailPort)
+            SmtpClient client = new SmtpClient(_emailSettings.MailServer, _emailSettings.MailPort)
             {
                 Port = _emailSettings.MailPort,
                 UseDefaultCredentials = false,
                 EnableSsl = true,
                 Credentials = new NetworkCredential(_emailSettings.Sender, _emailSettings.Password)
             };
-            var mailMessage = new MailMessage
+
+            MailMessage mailMessage = new MailMessage
             {
                 From = new MailAddress(_emailSettings.Sender),
                 Subject = subject,
@@ -46,5 +45,6 @@ namespace DimensionData.Services
 
             return client.SendMailAsync(mailMessage);
         }
+
     }
 }
