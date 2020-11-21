@@ -25,7 +25,11 @@
       "DimensionData/1.0.0": {
         "dependencies": {
           "Chart.js": "2.9.3",
+<<<<<<< HEAD
           "MailKit": "2.10.0",
+=======
+          "MailKit": "2.9.0",
+>>>>>>> parent of ee5ec31... Revert "SMTP email service instead of SendGrid"
           "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": "3.1.9",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.9",
           "Microsoft.AspNetCore.Identity.UI": "3.1.9",
@@ -305,6 +309,7 @@
         }
       },
       "Chart.js/2.9.3": {},
+<<<<<<< HEAD
       "MailKit/2.10.0": {
         "dependencies": {
           "MimeKit": "2.10.0"
@@ -313,6 +318,16 @@
           "lib/netstandard2.0/MailKit.dll": {
             "assemblyVersion": "2.10.0.0",
             "fileVersion": "2.10.0.0"
+=======
+      "MailKit/2.9.0": {
+        "dependencies": {
+          "MimeKit": "2.9.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/MailKit.dll": {
+            "assemblyVersion": "2.9.0.0",
+            "fileVersion": "2.9.0.0"
+>>>>>>> parent of ee5ec31... Revert "SMTP email service instead of SendGrid"
           }
         },
         "compile": {
@@ -1314,19 +1329,30 @@
           "System.Security.Principal.Windows": "4.5.0"
         }
       },
+<<<<<<< HEAD
       "MimeKit/2.10.0": {
         "dependencies": {
           "Portable.BouncyCastle": "1.8.8",
           "System.Buffers": "4.5.1",
           "System.Data.DataSetExtensions": "4.5.0",
+=======
+      "MimeKit/2.9.2": {
+        "dependencies": {
+          "Portable.BouncyCastle": "1.8.5",
+>>>>>>> parent of ee5ec31... Revert "SMTP email service instead of SendGrid"
           "System.Reflection.TypeExtensions": "4.4.0",
           "System.Security.Cryptography.Pkcs": "4.7.0",
           "System.Text.Encoding.CodePages": "4.5.1"
         },
         "runtime": {
           "lib/netstandard2.0/MimeKit.dll": {
+<<<<<<< HEAD
             "assemblyVersion": "2.10.0.0",
             "fileVersion": "2.10.0.0"
+=======
+            "assemblyVersion": "2.9.0.0",
+            "fileVersion": "2.9.2.0"
+>>>>>>> parent of ee5ec31... Revert "SMTP email service instead of SendGrid"
           }
         },
         "compile": {
@@ -1406,11 +1432,19 @@
           "lib/netstandard1.6/NuGet.Frameworks.dll": {}
         }
       },
+<<<<<<< HEAD
       "Portable.BouncyCastle/1.8.8": {
         "runtime": {
           "lib/netstandard2.0/BouncyCastle.Crypto.dll": {
             "assemblyVersion": "1.8.8.0",
             "fileVersion": "1.8.8.2"
+=======
+      "Portable.BouncyCastle/1.8.5": {
+        "runtime": {
+          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {
+            "assemblyVersion": "1.8.5.0",
+            "fileVersion": "1.8.5.50"
+>>>>>>> parent of ee5ec31... Revert "SMTP email service instead of SendGrid"
           }
         },
         "compile": {
@@ -4178,12 +4212,21 @@
       "path": "chart.js/2.9.3",
       "hashPath": "chart.js.2.9.3.nupkg.sha512"
     },
+<<<<<<< HEAD
     "MailKit/2.10.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-+MuVBWstHANt4iescbL0zzOZX+OllALJQf+uDdIPsCx+mE3LsNthpJv/8em93VzGoFev1WGLMJfLjCBreg8STg==",
       "path": "mailkit/2.10.0",
       "hashPath": "mailkit.2.10.0.nupkg.sha512"
+=======
+    "MailKit/2.9.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-yFXqvORpRyveseJ4+RNOKNwabu/5vk1EVdY4oTKWvwDgWGTnOyop+U7iF6C1uYe5NroCCkKYPMPsgtMVX9FdcQ==",
+      "path": "mailkit/2.9.0",
+      "hashPath": "mailkit.2.9.0.nupkg.sha512"
+>>>>>>> parent of ee5ec31... Revert "SMTP email service instead of SendGrid"
     },
     "Microsoft.AspNetCore.Cryptography.Internal/3.1.9": {
       "type": "package",
@@ -4633,12 +4676,21 @@
       "path": "microsoft.win32.registry/4.5.0",
       "hashPath": "microsoft.win32.registry.4.5.0.nupkg.sha512"
     },
+<<<<<<< HEAD
     "MimeKit/2.10.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-AHbCxNo6Ue98q/r81TKdCisRJSOv5EF0PWctUqhtzjDJx3xeTxguxZHyZy3ATbHfHFDRVR7TeZgmsfRP7dXs6g==",
       "path": "mimekit/2.10.0",
       "hashPath": "mimekit.2.10.0.nupkg.sha512"
+=======
+    "MimeKit/2.9.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-tj8mhCKPFu4FK9F2Md1x5xN3hVY7EC5e6j8Z51ynReRWhnlFfVkIWj5jnHZu7irUsvSX3JWk0HL5LLOuECOFbw==",
+      "path": "mimekit/2.9.2",
+      "hashPath": "mimekit.2.9.2.nupkg.sha512"
+>>>>>>> parent of ee5ec31... Revert "SMTP email service instead of SendGrid"
     },
     "NETStandard.Library/1.6.1": {
       "type": "package",
@@ -4661,12 +4713,21 @@
       "path": "nuget.frameworks/4.7.0",
       "hashPath": "nuget.frameworks.4.7.0.nupkg.sha512"
     },
+<<<<<<< HEAD
     "Portable.BouncyCastle/1.8.8": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-1rxdf8NfyAxLlqIEciCl/yNhmz1YiLkmp6rrF8p3/NVmyHHzPWLx8djtDvSAwhPLg64BXvsRcM3+5bP1HAUdYg==",
       "path": "portable.bouncycastle/1.8.8",
       "hashPath": "portable.bouncycastle.1.8.8.nupkg.sha512"
+=======
+    "Portable.BouncyCastle/1.8.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-EaCgmntbH1sOzemRTqyXSqYjB6pLH7VCYHhhDYZ59guHSD5qPwhIYa7kfy0QUlmTRt9IXhaXdFhNuBUArp70Ng==",
+      "path": "portable.bouncycastle/1.8.5",
+      "hashPath": "portable.bouncycastle.1.8.5.nupkg.sha512"
+>>>>>>> parent of ee5ec31... Revert "SMTP email service instead of SendGrid"
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "type": "package",

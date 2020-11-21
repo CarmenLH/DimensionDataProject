@@ -48,7 +48,11 @@
             },
             "MailKit": {
               "target": "Package",
+<<<<<<< HEAD
               "version": "[2.10.0, )"
+=======
+              "version": "[2.9.0, )"
+>>>>>>> parent of ee5ec31... Revert "SMTP email service instead of SendGrid"
             },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",

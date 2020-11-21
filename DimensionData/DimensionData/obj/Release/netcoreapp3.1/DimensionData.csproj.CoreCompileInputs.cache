@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 1ce943d88a0027462dd38615ec9ee4afeec049b8
+=======
+576e5408bbe9111a69ffbcad571059de3d14fcaf
+>>>>>>> parent of ee5ec31... Revert "SMTP email service instead of SendGrid"
