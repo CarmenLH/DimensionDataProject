@@ -58,7 +58,7 @@ namespace DimensionData.Controllers
 
             if (roles.Contains("Manager") || roles.Contains("Admin"))
             {
-               
+
                 var employees = from s in _context.Employee.Include(e => e.Edu).Include(e => e.Emp).Include(e => e.Job) select s;
                 //Filter data based on search param
                 if (!String.IsNullOrEmpty(searchString))
@@ -126,8 +126,8 @@ namespace DimensionData.Controllers
                 int pageSize = 10;
                 var pagedList = await PaginatedList<Employee>.CreateAsync(employees.AsNoTracking(), pageNumber ?? 1, pageSize);
                 return View(pagedList);
-            }   
-            
+            }
+
         }
 
         // GET: Employees/Details/5
@@ -197,7 +197,7 @@ namespace DimensionData.Controllers
         {
             if(ModelState.IsValid)
             {
-                return RedirectToAction("Index", await _context.UpdateAsync(id,employee));
+                return RedirectToAction("Index", await _context.UpdateAsync(id,employee));        
             }
 
             return View(employee);
